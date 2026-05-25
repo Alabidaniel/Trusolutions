@@ -1,10 +1,16 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth/react-native";
+} from "firebase/auth";
 import { auth } from "../config/firebase";
 import { apiRequest } from "../api/client";
 
@@ -100,4 +106,3 @@ export function useAuth() {
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 }
-
