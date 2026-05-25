@@ -1,16 +1,19 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useAppointments } from "../context/AppointmentContext";
+import { apiRequest } from "../api/client";
 
 export default function TherapistBookingScreen() {
   const navigation = useNavigation();
@@ -27,15 +30,55 @@ export default function TherapistBookingScreen() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [sessionType, setSessionType] = useState("Chat");
+  const [slots, setSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(true);
+  const [booking, setBooking] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState(null);
 
-  const timeSlots = [
-    "9:00 AM",
-    "10:00 AM",
-    "11:30 AM",
-    "1:00 PM",
-    "3:00 PM",
-    "5:00 PM",
-  ];
+  useEffect(() => {
+    let alive = true;
+
+    async function loadSlots() {
+      if (!therapist?.id) {
+        setLoadingSlots(false);
+        return;
+      }
+
+      try {
+        setLoadingSlots(true);
+        const result = await apiRequest(`/therapists/${therapist.id}/slots`, {
+          query: { page: 1, limit: 100 },
+        });
+        if (!alive) return;
+        setSlots(result?.items || []);
+      } catch (err) {
+        if (!alive) return;
+        Alert.alert("Failed to load slots", err?.message || "Please try again.");
+      } finally {
+        if (alive) setLoadingSlots(false);
+      }
+    }
+
+    loadSlots();
+    return () => {
+      alive = false;
+    };
+  }, [therapist?.id]);
+
+  const timeSlots = useMemo(() => {
+    if (!selectedDate) return [];
+    return slots
+      .filter((s) => String(s.startAt || "").startsWith(selectedDate))
+      .map((s) => {
+        const d = new Date(s.startAt);
+        return {
+          id: s.id,
+          startAt: s.startAt,
+          endAt: s.endAt,
+          label: d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        };
+      });
+  }, [selectedDate, slots]);
 
   const sessionTypes = ["Chat", "Call", "In-Person"];
 
@@ -54,21 +97,28 @@ export default function TherapistBookingScreen() {
     [selectedDate],
   );
 
-  const canConfirm = Boolean(selectedDate && selectedTime && sessionType);
+  const canConfirm = Boolean(selectedDate && selectedTime && sessionType && selectedSlot);
 
-  const handleConfirmBooking = () => {
+  const handleConfirmBooking = async () => {
     if (!canConfirm) {
       return;
     }
 
-    const appointment = addAppointment({
-      therapist,
-      date: selectedDate,
-      time: selectedTime,
-      sessionType,
-    });
-
-    navigation.navigate("TherapistBookingSuccess", { appointment });
+    try {
+      setBooking(true);
+      const appointment = await addAppointment({
+        therapist,
+        date: selectedDate,
+        time: selectedTime,
+        sessionType,
+        slot: selectedSlot,
+      });
+      navigation.navigate("TherapistBookingSuccess", { appointment });
+    } catch (err) {
+      Alert.alert("Booking failed", err?.message || "Please try again.");
+    } finally {
+      setBooking(false);
+    }
   };
 
   return (
@@ -113,8 +163,12 @@ export default function TherapistBookingScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Choose a date</Text>
           <View style={styles.calendarCard}>
-            <Calendar
-              onDayPress={(day) => setSelectedDate(day.dateString)}
+              <Calendar
+              onDayPress={(day) => {
+                setSelectedDate(day.dateString);
+                setSelectedTime("");
+                setSelectedSlot(null);
+              }}
               markedDates={markedDates}
               enableSwipeMonths
               hideExtraDays
@@ -139,27 +193,41 @@ export default function TherapistBookingScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Available time slots</Text>
-          <View style={styles.optionGrid}>
-            {timeSlots.map((time) => {
-              const selected = selectedTime === time;
-              return (
-                <TouchableOpacity
-                  key={time}
-                  style={[styles.optionChip, selected && styles.optionChipActive]}
-                  onPress={() => setSelectedTime(time)}
-                >
-                  <Text
-                    style={[
-                      styles.optionText,
-                      selected && styles.optionTextActive,
-                    ]}
+          {loadingSlots ? (
+            <View style={{ paddingVertical: 16 }}>
+              <ActivityIndicator color="#7A4B2F" />
+            </View>
+          ) : (
+            <View style={styles.optionGrid}>
+              {timeSlots.map((slot) => {
+                const selected = selectedTime === slot.label;
+                return (
+                  <TouchableOpacity
+                    key={slot.id}
+                    style={[styles.optionChip, selected && styles.optionChipActive]}
+                    onPress={() => {
+                      setSelectedTime(slot.label);
+                      setSelectedSlot(slot);
+                    }}
                   >
-                    {time}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
+                    <Text
+                      style={[
+                        styles.optionText,
+                        selected && styles.optionTextActive,
+                      ]}
+                    >
+                      {slot.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+              {!timeSlots.length ? (
+                <Text style={{ color: "#8A6A57", marginTop: 8 }}>
+                  No available slots for this date.
+                </Text>
+              ) : null}
+            </View>
+          )}
         </View>
 
         <View style={styles.section}>
@@ -200,10 +268,10 @@ export default function TherapistBookingScreen() {
 
         <TouchableOpacity
           style={[styles.button, !canConfirm && styles.buttonDisabled]}
-          disabled={!canConfirm}
+          disabled={!canConfirm || booking}
           onPress={handleConfirmBooking}
         >
-          <Text style={styles.buttonText}>Confirm Booking</Text>
+          <Text style={styles.buttonText}>{booking ? "Booking..." : "Confirm Booking"}</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

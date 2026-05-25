@@ -1,118 +1,186 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { apiRequest } from "../api/client";
 
 const CommunityContext = createContext(null);
 
-const starterPosts = [
-  {
-    id: "post-1",
-    author: "Ada",
-    isAnonymous: false,
-    title: "A small win today",
-    experience:
-      "I finally took a short walk after staying indoors for days. It felt small, but I am proud of it.",
-    topics: ["Self-care", "Motivation"],
-    createdAt: "2h ago",
-    liked: false,
-    likes: 18,
-    reaction: null,
-    comments: [
-      {
-        id: "comment-1",
-        author: "Mira",
-        text: "That is a real win. Small steps count.",
-      },
-    ],
-  },
-  {
-    id: "post-2",
-    author: "Anonymous",
-    isAnonymous: true,
-    title: "Trying to manage stress better",
-    experience:
-      "Work has been heavy lately, but I am learning to pause before I spiral. Breathing exercises helped this week.",
-    topics: ["Stress", "Work"],
-    createdAt: "5h ago",
-    liked: true,
-    likes: 27,
-    reaction: "support",
-    comments: [
-      {
-        id: "comment-2",
-        author: "Jay",
-        text: "Thanks for sharing this. Needed the reminder.",
-      },
-      {
-        id: "comment-3",
-        author: "Nora",
-        text: "Breathing exercises help me too.",
-      },
-    ],
-  },
-];
+function formatTime(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString();
+}
+
+function normalizePost(p) {
+  return {
+    id: p.id,
+    author: p.authorDisplayName || "User",
+    isAnonymous: Boolean(p.isAnonymous),
+    title: p.title,
+    experience: p.body,
+    topics: Array.isArray(p.topics) ? p.topics : [],
+    createdAt: formatTime(p.createdAt),
+    liked: Boolean(p.liked),
+    likes: Number(p.likesCount || 0),
+    reaction: p.reaction ? String(p.reaction).toLowerCase() : null,
+    commentsCount: Number(p.commentsCount || 0),
+    comments: [],
+  };
+}
 
 export function CommunityProvider({ children }) {
-  const [posts, setPosts] = useState(starterPosts);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const addPost = ({ title, experience, topics, isAnonymous }) => {
-    const newPost = {
-      id: `post-${Date.now()}`,
-      author: isAnonymous ? "Anonymous" : "You",
-      isAnonymous,
-      title: title.trim(),
-      experience: experience.trim(),
-      topics,
-      createdAt: "Just now",
-      liked: false,
-      likes: 0,
-      reaction: null,
-      comments: [],
-    };
-
-    setPosts((prev) => [newPost, ...prev]);
-    return newPost;
+  const refresh = async () => {
+    setLoading(true);
+    try {
+      const result = await apiRequest("/community/posts", {
+        query: { page: 1, limit: 30 },
+      });
+      const items = result?.items || [];
+      setPosts(items.map(normalizePost));
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const toggleLike = (postId) => {
+  useEffect(() => {
+    refresh().catch(() => {
+      setLoading(false);
+    });
+  }, []);
+
+  const addPost = async ({ title, experience, topics, isAnonymous }) => {
+    const post = await apiRequest("/community/posts", {
+      method: "POST",
+      body: {
+        title: title.trim(),
+        body: experience.trim(),
+        topics: topics || [],
+        isAnonymous,
+      },
+    });
+
+    // Optimistic insert; then refresh to pull correct counts + author display.
+    setPosts((prev) => [
+      {
+        id: post.id,
+        author: isAnonymous ? "Anonymous" : "You",
+        isAnonymous: Boolean(isAnonymous),
+        title: post.title,
+        experience: post.body,
+        topics: post.topics || [],
+        createdAt: "Just now",
+        liked: false,
+        likes: 0,
+        reaction: null,
+        commentsCount: 0,
+        comments: [],
+      },
+      ...prev,
+    ]);
+
+    refresh().catch(() => {});
+    return post;
+  };
+
+  const toggleLike = async (postId) => {
+    const current = posts.find((p) => p.id === postId);
+    const nextLiked = !current?.liked;
+
     setPosts((prev) =>
-      prev.map((post) =>
-        post.id === postId
+      prev.map((p) =>
+        p.id === postId
           ? {
-              ...post,
-              liked: !post.liked,
-              likes: post.liked ? Math.max(0, post.likes - 1) : post.likes + 1,
+              ...p,
+              liked: nextLiked,
+              likes: nextLiked ? p.likes + 1 : Math.max(0, p.likes - 1),
             }
-          : post,
+          : p,
       ),
     );
+
+    try {
+      const result = await apiRequest(`/community/posts/${postId}/like`, {
+        method: "PUT",
+        body: { liked: nextLiked },
+      });
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === postId
+            ? { ...p, liked: result.liked, likes: result.likesCount }
+            : p,
+        ),
+      );
+    } catch (err) {
+      // Roll back on failure.
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === postId
+            ? {
+                ...p,
+                liked: !nextLiked,
+                likes: !nextLiked ? p.likes + 1 : Math.max(0, p.likes - 1),
+              }
+            : p,
+        ),
+      );
+      throw err;
+    }
   };
 
-  const setReaction = (postId, reaction) => {
+  const setReaction = async (postId, reaction) => {
+    const next = reaction ? reaction.toUpperCase() : null;
+
     setPosts((prev) =>
-      prev.map((post) => (post.id === postId ? { ...post, reaction } : post)),
+      prev.map((p) => (p.id === postId ? { ...p, reaction } : p)),
     );
+
+    try {
+      const result = await apiRequest(`/community/posts/${postId}/reaction`, {
+        method: "PUT",
+        body: { reaction: next },
+      });
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === postId
+            ? { ...p, reaction: result.reaction ? result.reaction.toLowerCase() : null }
+            : p,
+        ),
+      );
+    } catch (err) {
+      refresh().catch(() => {});
+      throw err;
+    }
   };
 
-  const addComment = (postId, text) => {
+  const addComment = async (postId, text) => {
     const trimmedText = text.trim();
     if (!trimmedText) {
       return;
     }
 
+    const comment = await apiRequest(`/community/posts/${postId}/comments`, {
+      method: "POST",
+      body: { body: trimmedText },
+    });
+
     setPosts((prev) =>
-      prev.map((post) =>
-        post.id === postId
+      prev.map((p) =>
+        p.id === postId
           ? {
-              ...post,
+              ...p,
+              commentsCount: (p.commentsCount || 0) + 1,
               comments: [
-                ...post.comments,
+                ...p.comments,
                 {
-                  id: `comment-${Date.now()}`,
+                  id: comment.id,
                   author: "You",
-                  text: trimmedText,
+                  text: comment.body,
                 },
               ],
             }
-          : post,
+          : p,
       ),
     );
   };
@@ -120,12 +188,14 @@ export function CommunityProvider({ children }) {
   const value = useMemo(
     () => ({
       posts,
+      loading,
+      refresh,
       addPost,
       toggleLike,
       setReaction,
       addComment,
     }),
-    [posts],
+    [posts, loading],
   );
 
   return (

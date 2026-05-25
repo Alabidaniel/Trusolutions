@@ -1,44 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-const issues = [
-  "Stress",
-  "Anxiety",
-  "Grief",
-  "Depression",
-  "Relationship",
-  "Confession",
-  "Self-esteem",
-  "Family",
-  "Work",
-  "Trauma",
-  "Break-up",
-  "Loneliness",
-];
+import { apiRequest } from "../api/client";
 
 const SelectIssuesScreen = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const [selectedIssues, setSelectedIssues] = useState([]);
+  const [issues, setIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedIssueIds, setSelectedIssueIds] = useState([]);
 
-  const toggleIssue = (issue) => {
-    const newSelected = selectedIssues.includes(issue)
-      ? selectedIssues.filter((i) => i !== issue)
-      : [...selectedIssues, issue];
-    setSelectedIssues(newSelected);
+  const selectedIssueIdSet = useMemo(
+    () => new Set(selectedIssueIds),
+    [selectedIssueIds],
+  );
+
+  useEffect(() => {
+    let alive = true;
+
+    async function load() {
+      try {
+        setLoading(true);
+        const items = await apiRequest("/issues");
+        if (!alive) return;
+        setIssues(items || []);
+      } catch (err) {
+        if (!alive) return;
+        Alert.alert(
+          "Failed to load issues",
+          err?.message || "Please try again.",
+        );
+      } finally {
+        if (alive) setLoading(false);
+      }
+    }
+
+    load();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const toggleIssue = (issueId) => {
+    setSelectedIssueIds((prev) =>
+      prev.includes(issueId) ? prev.filter((id) => id !== issueId) : [...prev, issueId],
+    );
   };
 
-  const handleContinue = () => {
-    navigation.navigate("ProfileMode");
+  const handleContinue = async () => {
+    try {
+      setLoading(true);
+      await apiRequest("/users/me/issues", {
+        method: "PUT",
+        body: { issueIds: selectedIssueIds },
+      });
+      navigation.navigate("ProfileMode");
+    } catch (err) {
+      Alert.alert(
+        "Failed to save issues",
+        err?.message || "Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -62,28 +96,40 @@ const SelectIssuesScreen = () => {
           </Text>
         </View>
 
-        <View style={styles.grid}>
-          {issues.map((issue) => {
-            const isSelected = selectedIssues.includes(issue);
-            return (
-              <TouchableOpacity
-                key={issue}
-                style={[styles.issueChip, isSelected && styles.issueChipSelected]}
-                onPress={() => toggleIssue(issue)}
-              >
-                {isSelected ? (
-                  <Ionicons name="checkmark-circle" size={14} color="#FFF9F3" />
-                ) : null}
-                <Text style={[styles.issueText, isSelected && styles.issueTextSelected]}>
-                  {issue}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        {loading ? (
+          <View style={{ paddingVertical: 18 }}>
+            <ActivityIndicator color="#7A4B2F" />
+          </View>
+        ) : (
+          <View style={styles.grid}>
+            {issues.map((issue) => {
+              const isSelected = selectedIssueIdSet.has(issue.id);
+              return (
+                <TouchableOpacity
+                  key={issue.id}
+                  style={[styles.issueChip, isSelected && styles.issueChipSelected]}
+                  onPress={() => toggleIssue(issue.id)}
+                >
+                  {isSelected ? (
+                    <Ionicons name="checkmark-circle" size={14} color="#FFF9F3" />
+                  ) : null}
+                  <Text style={[styles.issueText, isSelected && styles.issueTextSelected]}>
+                    {issue.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        )}
 
-        <TouchableOpacity style={styles.button} onPress={handleContinue}>
-          <Text style={styles.buttonText}>Continue</Text>
+        <TouchableOpacity
+          style={[styles.button, (loading || selectedIssueIds.length === 0) && { opacity: 0.6 }]}
+          onPress={handleContinue}
+          disabled={loading || selectedIssueIds.length === 0}
+        >
+          <Text style={styles.buttonText}>
+            {loading ? "Saving..." : "Continue"}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

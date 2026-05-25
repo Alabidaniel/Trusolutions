@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -56,7 +57,9 @@ function FeedCard({ post, onLike, onReaction, onComment }) {
 
       <View style={styles.postStats}>
         <Text style={styles.statText}>{post.likes} likes</Text>
-        <Text style={styles.statText}>{post.comments.length} comments</Text>
+        <Text style={styles.statText}>
+          {post.commentsCount ?? post.comments.length} comments
+        </Text>
       </View>
 
       <View style={styles.actionRow}>
@@ -159,7 +162,7 @@ export default function InteractionModeScreen() {
           <Ionicons name="sparkles-outline" size={20} color="#7A4B2F" />
           <Text style={styles.feedIntroText}>
             Posts shared from `Share Experience` will appear here for the local
-            prototype.
+            community.
           </Text>
         </View>
 
@@ -167,9 +170,27 @@ export default function InteractionModeScreen() {
           <FeedCard
             key={post.id}
             post={post}
-            onLike={() => toggleLike(post.id)}
-            onReaction={(reaction) => setReaction(post.id, reaction)}
-            onComment={(text) => addComment(post.id, text)}
+            onLike={async () => {
+              try {
+                await toggleLike(post.id);
+              } catch (err) {
+                Alert.alert("Action failed", err?.message || "Please try again.");
+              }
+            }}
+            onReaction={async (reaction) => {
+              try {
+                await setReaction(post.id, reaction);
+              } catch (err) {
+                Alert.alert("Action failed", err?.message || "Please try again.");
+              }
+            }}
+            onComment={async (text) => {
+              try {
+                await addComment(post.id, text);
+              } catch (err) {
+                Alert.alert("Comment failed", err?.message || "Please try again.");
+              }
+            }}
           />
         ))}
       </ScrollView>

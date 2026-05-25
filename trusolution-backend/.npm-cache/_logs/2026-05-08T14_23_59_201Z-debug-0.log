@@ -1,0 +1,97 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.2
+2 info using node@v22.19.0
+3 silly config load:file:C:\Users\user\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-backend\.npmrc
+5 silly config load:file:C:\Users\user\.npmrc
+6 silly config load:file:C:\Users\user\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install joi
+8 verbose argv "install" "--cache" ".npm-cache" "--no-audit" "--no-fund" "joi"
+9 verbose logfile logs-max:10 dir:C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-backend\.npm-cache\_logs\2026-05-08T14_23_59_201Z-
+10 verbose logfile C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-backend\.npm-cache\_logs\2026-05-08T14_23_59_201Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest joi@*
+15 silly packumentCache full:https://registry.npmjs.org/joi cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/joi 650ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/joi set size:undefined disposed:false
+18 silly placeDep ROOT joi@18.2.1 OK for: trusolution-backend@1.0.0 want: *
+19 silly fetch manifest @hapi/address@^5.1.1
+20 silly packumentCache full:https://registry.npmjs.org/@hapi%2faddress cache-miss
+21 silly fetch manifest @hapi/formula@^3.0.2
+22 silly packumentCache full:https://registry.npmjs.org/@hapi%2fformula cache-miss
+23 silly fetch manifest @hapi/hoek@^11.0.7
+24 silly packumentCache full:https://registry.npmjs.org/@hapi%2fhoek cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/@hapi%2faddress 305ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/@hapi%2faddress set size:undefined disposed:false
+27 silly fetch manifest @hapi/pinpoint@^2.0.1
+28 silly packumentCache full:https://registry.npmjs.org/@hapi%2fpinpoint cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/@hapi%2fformula 501ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/@hapi%2fformula set size:undefined disposed:false
+31 silly fetch manifest @hapi/tlds@^1.1.1
+32 silly packumentCache full:https://registry.npmjs.org/@hapi%2ftlds cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/@hapi%2ftlds 210ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/@hapi%2ftlds set size:undefined disposed:false
+35 silly fetch manifest @hapi/topo@^6.0.2
+36 silly packumentCache full:https://registry.npmjs.org/@hapi%2ftopo cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/@hapi%2fpinpoint 427ms (cache miss)
+38 silly packumentCache full:https://registry.npmjs.org/@hapi%2fpinpoint set size:undefined disposed:false
+39 silly fetch manifest @standard-schema/spec@^1.1.0
+40 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec cache-miss
+41 http fetch GET 200 https://registry.npmjs.org/@hapi%2fhoek 778ms (cache miss)
+42 silly packumentCache full:https://registry.npmjs.org/@hapi%2fhoek set size:undefined disposed:false
+43 http fetch GET 200 https://registry.npmjs.org/@hapi%2ftopo 152ms (cache miss)
+44 silly packumentCache full:https://registry.npmjs.org/@hapi%2ftopo set size:undefined disposed:false
+45 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2fspec 166ms (cache miss)
+46 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec set size:undefined disposed:false
+47 silly placeDep ROOT @hapi/address@5.1.1 OK for: joi@18.2.1 want: ^5.1.1
+48 silly placeDep ROOT @hapi/formula@3.0.2 OK for: joi@18.2.1 want: ^3.0.2
+49 silly placeDep ROOT @hapi/hoek@11.0.7 OK for: joi@18.2.1 want: ^11.0.7
+50 silly placeDep ROOT @hapi/pinpoint@2.0.1 OK for: joi@18.2.1 want: ^2.0.1
+51 silly placeDep ROOT @hapi/tlds@1.1.6 OK for: joi@18.2.1 want: ^1.1.1
+52 silly placeDep ROOT @hapi/topo@6.0.2 OK for: joi@18.2.1 want: ^6.0.2
+53 silly placeDep ROOT @standard-schema/spec@1.1.0 OK for: joi@18.2.1 want: ^1.1.0
+54 silly fetch manifest @hapi/hoek@^11.0.2
+55 silly packumentCache full:https://registry.npmjs.org/@hapi%2fhoek cache-miss
+56 http cache https://registry.npmjs.org/@hapi%2fhoek 18ms (cache hit)
+57 silly packumentCache full:https://registry.npmjs.org/@hapi%2fhoek set size:121471 disposed:false
+58 silly reify moves {}
+59 http cache @standard-schema/spec@https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz 0ms (cache hit)
+60 http cache @hapi/topo@https://registry.npmjs.org/@hapi/topo/-/topo-6.0.2.tgz 0ms (cache hit)
+61 http cache @hapi/tlds@https://registry.npmjs.org/@hapi/tlds/-/tlds-1.1.6.tgz 0ms (cache hit)
+62 http cache @hapi/pinpoint@https://registry.npmjs.org/@hapi/pinpoint/-/pinpoint-2.0.1.tgz 0ms (cache hit)
+63 http cache @hapi/hoek@https://registry.npmjs.org/@hapi/hoek/-/hoek-11.0.7.tgz 0ms (cache hit)
+64 http cache @hapi/formula@https://registry.npmjs.org/@hapi/formula/-/formula-3.0.2.tgz 0ms (cache hit)
+65 http cache @hapi/address@https://registry.npmjs.org/@hapi/address/-/address-5.1.1.tgz 0ms (cache hit)
+66 http cache joi@https://registry.npmjs.org/joi/-/joi-18.2.1.tgz 1ms (cache hit)
+67 silly tarball no local data for @standard-schema/spec@https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz. Extracting by manifest.
+68 silly tarball no local data for @hapi/topo@https://registry.npmjs.org/@hapi/topo/-/topo-6.0.2.tgz. Extracting by manifest.
+69 silly tarball no local data for @hapi/tlds@https://registry.npmjs.org/@hapi/tlds/-/tlds-1.1.6.tgz. Extracting by manifest.
+70 silly tarball no local data for @hapi/pinpoint@https://registry.npmjs.org/@hapi/pinpoint/-/pinpoint-2.0.1.tgz. Extracting by manifest.
+71 silly tarball no local data for @hapi/hoek@https://registry.npmjs.org/@hapi/hoek/-/hoek-11.0.7.tgz. Extracting by manifest.
+72 silly tarball no local data for @hapi/formula@https://registry.npmjs.org/@hapi/formula/-/formula-3.0.2.tgz. Extracting by manifest.
+73 silly tarball no local data for @hapi/address@https://registry.npmjs.org/@hapi/address/-/address-5.1.1.tgz. Extracting by manifest.
+74 silly tarball no local data for joi@https://registry.npmjs.org/joi/-/joi-18.2.1.tgz. Extracting by manifest.
+75 http fetch GET 200 https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz 258ms (cache miss)
+76 http fetch GET 200 https://registry.npmjs.org/@hapi/topo/-/topo-6.0.2.tgz 264ms (cache miss)
+77 http fetch GET 200 https://registry.npmjs.org/@hapi/tlds/-/tlds-1.1.6.tgz 273ms (cache miss)
+78 http fetch GET 200 https://registry.npmjs.org/@hapi/pinpoint/-/pinpoint-2.0.1.tgz 611ms (cache miss)
+79 http fetch GET 200 https://registry.npmjs.org/@hapi/formula/-/formula-3.0.2.tgz 880ms (cache miss)
+80 http fetch GET 200 https://registry.npmjs.org/@hapi/hoek/-/hoek-11.0.7.tgz 1195ms (cache miss)
+81 http fetch GET 200 https://registry.npmjs.org/@hapi/address/-/address-5.1.1.tgz 1267ms (cache miss)
+82 http fetch GET 200 https://registry.npmjs.org/joi/-/joi-18.2.1.tgz 1823ms (cache miss)
+83 silly ADD node_modules/@standard-schema/spec
+84 silly ADD node_modules/@hapi/topo
+85 silly ADD node_modules/@hapi/tlds
+86 silly ADD node_modules/@hapi/pinpoint
+87 silly ADD node_modules/@hapi/hoek
+88 silly ADD node_modules/@hapi/formula
+89 silly ADD node_modules/@hapi/address
+90 silly ADD node_modules/joi
+91 verbose cwd C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-backend
+92 verbose os Windows_NT 10.0.19045
+93 verbose node v22.19.0
+94 verbose npm  v11.6.2
+95 verbose exit 0
+96 info ok

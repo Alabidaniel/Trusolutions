@@ -48,28 +48,30 @@ export default function ShareExperienceScreen() {
 
   const handlePost = async () => {
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    try {
+      await addPost({
+        title,
+        experience,
+        topics: selectedTopics.length ? selectedTopics : ["Other"],
+        isAnonymous,
+      });
 
-    addPost({
-      title,
-      experience,
-      topics: selectedTopics.length ? selectedTopics : ["Other"],
-      isAnonymous,
-    });
-
-    setIsLoading(false);
-
-    Alert.alert("Posted", "Your experience has been added to the local feed.", [
-      {
-        text: "View Feed",
-        onPress: () => {
-          setTitle("");
-          setExperience("");
-          setSelectedTopics([]);
-          navigation.navigate("MainTabs", { screen: "Interact" });
+      Alert.alert("Posted", "Your experience has been added to the community feed.", [
+        {
+          text: "View Feed",
+          onPress: () => {
+            setTitle("");
+            setExperience("");
+            setSelectedTopics([]);
+            navigation.navigate("MainTabs", { screen: "Interact" });
+          },
         },
-      },
-    ]);
+      ]);
+    } catch (err) {
+      Alert.alert("Post failed", err?.message || "Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderTopic = ({ item }) => (
@@ -113,7 +115,7 @@ export default function ShareExperienceScreen() {
 
         <Text style={styles.subtitle}>
           Share something real. It will appear in the local community feed for
-          this prototype.
+          your account.
         </Text>
 
         <View style={styles.form}>

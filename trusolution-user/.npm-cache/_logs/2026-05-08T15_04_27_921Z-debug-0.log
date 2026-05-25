@@ -1,0 +1,709 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.2
+2 info using node@v22.19.0
+3 silly config load:file:C:\Users\user\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-user\.npmrc
+5 silly config load:file:C:\Users\user\.npmrc
+6 silly config load:file:C:\Users\user\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install firebase @react-native-async-storage/async-storage
+8 verbose argv "install" "--cache" ".npm-cache" "--no-audit" "--no-fund" "firebase" "@react-native-async-storage/async-storage"
+9 verbose logfile logs-max:10 dir:C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-user\.npm-cache\_logs\2026-05-08T15_04_27_921Z-
+10 verbose logfile C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-user\.npm-cache\_logs\2026-05-08T15_04_27_921Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+14 silly idealTree buildDeps
+15 silly fetch manifest firebase@*
+16 silly packumentCache full:https://registry.npmjs.org/firebase cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/firebase 2647ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/firebase set size:undefined disposed:false
+19 silly fetch manifest @react-native-async-storage/async-storage@*
+20 silly packumentCache full:https://registry.npmjs.org/@react-native-async-storage%2fasync-storage cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/@react-native-async-storage%2fasync-storage 728ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/@react-native-async-storage%2fasync-storage set size:undefined disposed:false
+23 silly fetch manifest react@19.1.0
+24 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/react 438ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/react set size:undefined disposed:false
+27 silly fetch manifest react-native@0.81.5
+28 silly packumentCache full:https://registry.npmjs.org/react-native cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/react-native 555ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/react-native set size:undefined disposed:false
+31 silly fetch manifest @types/react@^19.1.0
+32 silly packumentCache full:https://registry.npmjs.org/@types%2freact cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/@types%2freact 308ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/@types%2freact set size:undefined disposed:false
+35 silly placeDep ROOT @react-native-async-storage/async-storage@3.0.2 OK for: trusolution@1.0.0 want: *
+36 silly placeDep ROOT firebase@12.13.0 OK for: trusolution@1.0.0 want: *
+37 silly fetch manifest idb@8.0.3
+38 silly packumentCache full:https://registry.npmjs.org/idb cache-miss
+39 silly fetch manifest @firebase/ai@2.12.0
+40 silly packumentCache full:https://registry.npmjs.org/@firebase%2fai cache-miss
+41 silly fetch manifest @firebase/app@0.14.12
+42 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp cache-miss
+43 http fetch GET 200 https://registry.npmjs.org/idb 411ms (cache miss)
+44 silly packumentCache full:https://registry.npmjs.org/idb set size:undefined disposed:false
+45 silly fetch manifest @firebase/app-compat@0.5.12
+46 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-compat cache-miss
+47 http fetch GET 200 https://registry.npmjs.org/@firebase%2fai 799ms (cache miss)
+48 silly packumentCache full:https://registry.npmjs.org/@firebase%2fai set size:undefined disposed:false
+49 silly fetch manifest @firebase/app-types@0.9.5
+50 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-types cache-miss
+51 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-compat 1096ms (cache miss)
+52 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-compat set size:undefined disposed:false
+53 silly fetch manifest @firebase/auth@1.13.1
+54 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth cache-miss
+55 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-types 1448ms (cache miss)
+56 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-types set size:undefined disposed:false
+57 silly fetch manifest @firebase/auth-compat@0.6.6
+58 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-compat cache-miss
+59 http fetch GET 200 https://registry.npmjs.org/@firebase%2fauth-compat 1208ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-compat set size:undefined disposed:false
+61 silly fetch manifest @firebase/data-connect@0.7.0
+62 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdata-connect cache-miss
+63 http fetch GET 200 https://registry.npmjs.org/@firebase%2fauth 2992ms (cache miss)
+64 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth set size:undefined disposed:false
+65 silly fetch manifest @firebase/database@1.1.3
+66 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase cache-miss
+67 http fetch GET 200 https://registry.npmjs.org/@firebase%2fdata-connect 1271ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdata-connect set size:undefined disposed:false
+69 silly fetch manifest @firebase/database-compat@2.1.4
+70 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase-compat cache-miss
+71 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp 5077ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp set size:undefined disposed:false
+73 silly fetch manifest @firebase/firestore@4.14.1
+74 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore cache-miss
+75 http fetch GET 200 https://registry.npmjs.org/@firebase%2fdatabase-compat 1258ms (cache miss)
+76 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase-compat set size:undefined disposed:false
+77 silly fetch manifest @firebase/firestore-compat@0.4.9
+78 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore-compat cache-miss
+79 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffirestore-compat 1138ms (cache miss)
+80 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore-compat set size:undefined disposed:false
+81 silly fetch manifest @firebase/functions@0.13.4
+82 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions cache-miss
+83 http fetch GET 200 https://registry.npmjs.org/@firebase%2fdatabase 3115ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase set size:undefined disposed:false
+85 silly fetch manifest @firebase/functions-compat@0.4.4
+86 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions-compat cache-miss
+87 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffirestore 4565ms (cache miss)
+88 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore set size:undefined disposed:false
+89 silly fetch manifest @firebase/installations@0.6.22
+90 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations cache-miss
+91 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffunctions 2803ms (cache miss)
+92 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions set size:undefined disposed:false
+93 silly fetch manifest @firebase/installations-compat@0.2.22
+94 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations-compat cache-miss
+95 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffunctions-compat 2422ms (cache miss)
+96 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions-compat set size:undefined disposed:false
+97 silly fetch manifest @firebase/messaging@0.12.26
+98 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging cache-miss
+99 http fetch GET 200 https://registry.npmjs.org/@firebase%2finstallations-compat 1100ms (cache miss)
+100 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations-compat set size:undefined disposed:false
+101 silly fetch manifest @firebase/messaging-compat@0.2.26
+102 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging-compat cache-miss
+103 http fetch GET 200 https://registry.npmjs.org/@firebase%2fmessaging-compat 1158ms (cache miss)
+104 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging-compat set size:undefined disposed:false
+105 silly fetch manifest @firebase/storage@0.14.3
+106 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage cache-miss
+107 http fetch GET 200 https://registry.npmjs.org/@firebase%2finstallations 3160ms (cache miss)
+108 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations set size:undefined disposed:false
+109 silly fetch manifest @firebase/storage-compat@0.4.3
+110 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage-compat cache-miss
+111 http fetch GET 200 https://registry.npmjs.org/@firebase%2fmessaging 2946ms (cache miss)
+112 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging set size:undefined disposed:false
+113 silly fetch manifest @firebase/performance@0.7.12
+114 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance cache-miss
+115 http fetch GET 200 https://registry.npmjs.org/@firebase%2fstorage 1937ms (cache miss)
+116 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage set size:undefined disposed:false
+117 silly fetch manifest @firebase/performance-compat@0.2.25
+118 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance-compat cache-miss
+119 http fetch GET 200 https://registry.npmjs.org/@firebase%2fstorage-compat 2362ms (cache miss)
+120 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage-compat set size:undefined disposed:false
+121 silly fetch manifest @firebase/remote-config@0.8.3
+122 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config cache-miss
+123 http fetch GET 200 https://registry.npmjs.org/@firebase%2fperformance 2485ms (cache miss)
+124 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance set size:undefined disposed:false
+125 silly fetch manifest @firebase/remote-config-compat@0.2.24
+126 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config-compat cache-miss
+127 http fetch GET 200 https://registry.npmjs.org/@firebase%2fperformance-compat 1690ms (cache miss)
+128 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance-compat set size:undefined disposed:false
+129 silly fetch manifest @firebase/analytics@0.10.22
+130 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics cache-miss
+131 http fetch GET 200 https://registry.npmjs.org/@firebase%2fanalytics 1829ms (cache miss)
+132 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics set size:undefined disposed:false
+133 silly fetch manifest @firebase/analytics-compat@0.2.28
+134 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics-compat cache-miss
+135 http fetch GET 200 https://registry.npmjs.org/@firebase%2fremote-config-compat 2176ms (cache miss)
+136 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config-compat set size:undefined disposed:false
+137 silly fetch manifest @firebase/app-check@0.11.3
+138 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check cache-miss
+139 http fetch GET 200 https://registry.npmjs.org/@firebase%2fremote-config 3196ms (cache miss)
+140 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config set size:undefined disposed:false
+141 silly fetch manifest @firebase/app-check-compat@0.4.3
+142 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-compat cache-miss
+143 http fetch GET 200 https://registry.npmjs.org/@firebase%2fanalytics-compat 1200ms (cache miss)
+144 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics-compat set size:undefined disposed:false
+145 silly fetch manifest @firebase/util@1.15.1
+146 silly packumentCache full:https://registry.npmjs.org/@firebase%2futil cache-miss
+147 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-check-compat 1446ms (cache miss)
+148 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-compat set size:undefined disposed:false
+149 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-check 1915ms (cache miss)
+150 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check set size:undefined disposed:false
+151 http fetch GET 200 https://registry.npmjs.org/@firebase%2futil 1836ms (cache miss)
+152 silly packumentCache full:https://registry.npmjs.org/@firebase%2futil set size:undefined disposed:false
+153 silly placeDep ROOT idb@8.0.3 OK for: @react-native-async-storage/async-storage@3.0.2 want: 8.0.3
+154 silly fetch manifest @react-native-async-storage/async-storage@^2.2.0 || ^3.0.0
+155 silly packumentCache full:https://registry.npmjs.org/@react-native-async-storage%2fasync-storage cache-miss
+156 http cache https://registry.npmjs.org/@react-native-async-storage%2fasync-storage 31ms (cache hit)
+157 silly packumentCache full:https://registry.npmjs.org/@react-native-async-storage%2fasync-storage set size:410695 disposed:false
+158 silly fetch manifest react@*
+159 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+160 http cache https://registry.npmjs.org/react 46ms (cache hit)
+161 silly packumentCache full:https://registry.npmjs.org/react set size:6646698 disposed:false
+162 silly fetch manifest react-native@*
+163 silly packumentCache full:https://registry.npmjs.org/react-native cache-miss
+164 http cache https://registry.npmjs.org/react-native 73ms (cache hit)
+165 silly packumentCache full:https://registry.npmjs.org/react-native set size:15250009 disposed:false
+166 silly fetch manifest @react-native/jest-preset@0.85.3
+167 silly packumentCache full:https://registry.npmjs.org/@react-native%2fjest-preset cache-miss
+168 http fetch GET 200 https://registry.npmjs.org/@react-native%2fjest-preset 484ms (cache miss)
+169 silly packumentCache full:https://registry.npmjs.org/@react-native%2fjest-preset set size:undefined disposed:false
+170 silly fetch manifest @types/react@^19.1.1
+171 silly packumentCache full:https://registry.npmjs.org/@types%2freact cache-miss
+172 http cache https://registry.npmjs.org/@types%2freact 17ms (cache hit)
+173 silly packumentCache full:https://registry.npmjs.org/@types%2freact set size:2588964 disposed:false
+174 silly placeDep ROOT @firebase/ai@2.12.0 OK for: firebase@12.13.0 want: 2.12.0
+175 silly placeDep ROOT @firebase/app@0.14.12 OK for: @firebase/ai@2.12.0 want: 0.x
+176 silly placeDep ROOT @firebase/app-types@0.9.5 OK for: @firebase/ai@2.12.0 want: 0.x
+177 silly placeDep ROOT @firebase/analytics@0.10.22 OK for: firebase@12.13.0 want: 0.10.22
+178 silly placeDep ROOT @firebase/analytics-compat@0.2.28 OK for: firebase@12.13.0 want: 0.2.28
+179 silly placeDep ROOT @firebase/app-compat@0.5.12 OK for: @firebase/analytics-compat@0.2.28 want: 0.x
+180 silly placeDep ROOT @firebase/app-check@0.11.3 OK for: firebase@12.13.0 want: 0.11.3
+181 silly placeDep ROOT @firebase/app-check-compat@0.4.3 OK for: firebase@12.13.0 want: 0.4.3
+182 silly placeDep ROOT @firebase/auth@1.13.1 OK for: firebase@12.13.0 want: 1.13.1
+183 silly placeDep ROOT @firebase/auth-compat@0.6.6 OK for: firebase@12.13.0 want: 0.6.6
+184 silly placeDep ROOT @firebase/data-connect@0.7.0 OK for: firebase@12.13.0 want: 0.7.0
+185 silly placeDep ROOT @firebase/database@1.1.3 OK for: firebase@12.13.0 want: 1.1.3
+186 silly placeDep ROOT @firebase/database-compat@2.1.4 OK for: firebase@12.13.0 want: 2.1.4
+187 silly placeDep ROOT @firebase/firestore@4.14.1 OK for: firebase@12.13.0 want: 4.14.1
+188 silly placeDep ROOT @firebase/firestore-compat@0.4.9 OK for: firebase@12.13.0 want: 0.4.9
+189 silly placeDep ROOT @firebase/functions@0.13.4 OK for: firebase@12.13.0 want: 0.13.4
+190 silly placeDep ROOT @firebase/functions-compat@0.4.4 OK for: firebase@12.13.0 want: 0.4.4
+191 silly placeDep ROOT @firebase/installations@0.6.22 OK for: firebase@12.13.0 want: 0.6.22
+192 silly placeDep ROOT @firebase/installations-compat@0.2.22 OK for: firebase@12.13.0 want: 0.2.22
+193 silly placeDep ROOT @firebase/messaging@0.12.26 OK for: firebase@12.13.0 want: 0.12.26
+194 silly placeDep ROOT @firebase/messaging-compat@0.2.26 OK for: firebase@12.13.0 want: 0.2.26
+195 silly placeDep ROOT @firebase/performance@0.7.12 OK for: firebase@12.13.0 want: 0.7.12
+196 silly placeDep ROOT @firebase/performance-compat@0.2.25 OK for: firebase@12.13.0 want: 0.2.25
+197 silly placeDep ROOT @firebase/remote-config@0.8.3 OK for: firebase@12.13.0 want: 0.8.3
+198 silly placeDep ROOT @firebase/remote-config-compat@0.2.24 OK for: firebase@12.13.0 want: 0.2.24
+199 silly placeDep ROOT @firebase/storage@0.14.3 OK for: firebase@12.13.0 want: 0.14.3
+200 silly placeDep ROOT @firebase/storage-compat@0.4.3 OK for: firebase@12.13.0 want: 0.4.3
+201 silly placeDep ROOT @firebase/util@1.15.1 OK for: firebase@12.13.0 want: 1.15.1
+202 silly fetch manifest @firebase/app-check-interop-types@0.3.4
+203 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-interop-types cache-miss
+204 silly fetch manifest @firebase/component@0.7.3
+205 silly packumentCache full:https://registry.npmjs.org/@firebase%2fcomponent cache-miss
+206 silly fetch manifest @firebase/logger@0.5.1
+207 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger cache-miss
+208 http fetch GET 200 https://registry.npmjs.org/@firebase%2fcomponent 1740ms (cache miss)
+209 silly packumentCache full:https://registry.npmjs.org/@firebase%2fcomponent set size:undefined disposed:false
+210 silly fetch manifest tslib@^2.1.0
+211 silly packumentCache full:https://registry.npmjs.org/tslib cache-miss
+212 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-check-interop-types 2058ms (cache miss)
+213 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-interop-types set size:undefined disposed:false
+214 silly fetch manifest @firebase/logger@0.5.1
+215 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger cache-miss
+216 http fetch GET 200 https://registry.npmjs.org/tslib 167ms (cache miss)
+217 silly packumentCache full:https://registry.npmjs.org/tslib set size:undefined disposed:false
+218 silly fetch manifest @firebase/logger@0.5.1
+219 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger cache-miss
+220 http fetch GET 200 https://registry.npmjs.org/@firebase%2flogger 2714ms (cache miss)
+221 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger set size:undefined disposed:false
+222 silly fetch manifest idb@7.1.1
+223 silly packumentCache full:https://registry.npmjs.org/idb cache-miss
+224 http cache https://registry.npmjs.org/idb 36ms (cache hit)
+225 silly packumentCache full:https://registry.npmjs.org/idb set size:170881 disposed:false
+226 silly fetch manifest @firebase/analytics-types@0.8.4
+227 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics-types cache-miss
+228 http fetch GET 200 https://registry.npmjs.org/@firebase%2flogger 1396ms (cache miss)
+229 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger set size:undefined disposed:false
+230 silly fetch manifest @firebase/app-check-types@0.5.4
+231 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-types cache-miss
+232 http fetch GET 200 https://registry.npmjs.org/@firebase%2fapp-check-types 1105ms (cache miss)
+233 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-check-types set size:undefined disposed:false
+234 silly fetch manifest @firebase/auth-types@0.13.1
+235 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-types cache-miss
+236 http fetch GET 200 https://registry.npmjs.org/@firebase%2fanalytics-types 1981ms (cache miss)
+237 silly packumentCache full:https://registry.npmjs.org/@firebase%2fanalytics-types set size:undefined disposed:false
+238 silly fetch manifest @firebase/auth-interop-types@0.2.5
+239 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-interop-types cache-miss
+240 http fetch GET 200 https://registry.npmjs.org/@firebase%2flogger 4010ms (cache miss)
+241 silly packumentCache full:https://registry.npmjs.org/@firebase%2flogger set size:undefined disposed:false
+242 silly fetch manifest @firebase/auth-interop-types@0.2.5
+243 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-interop-types cache-miss
+244 http fetch GET 200 https://registry.npmjs.org/@firebase%2fauth-types 1617ms (cache miss)
+245 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-types set size:undefined disposed:false
+246 silly fetch manifest faye-websocket@0.11.4
+247 silly packumentCache full:https://registry.npmjs.org/faye-websocket cache-miss
+248 http fetch GET 200 https://registry.npmjs.org/@firebase%2fauth-interop-types 1659ms (cache miss)
+249 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-interop-types set size:undefined disposed:false
+250 silly fetch manifest @firebase/database-types@1.0.20
+251 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase-types cache-miss
+252 http fetch GET 200 https://registry.npmjs.org/faye-websocket 318ms (cache miss)
+253 silly packumentCache full:https://registry.npmjs.org/faye-websocket set size:undefined disposed:false
+254 silly fetch manifest @firebase/webchannel-wrapper@1.0.6
+255 silly packumentCache full:https://registry.npmjs.org/@firebase%2fwebchannel-wrapper cache-miss
+256 http fetch GET 200 https://registry.npmjs.org/@firebase%2fwebchannel-wrapper 1399ms (cache miss)
+257 silly packumentCache full:https://registry.npmjs.org/@firebase%2fwebchannel-wrapper set size:undefined disposed:false
+258 silly fetch manifest @grpc/grpc-js@~1.9.0
+259 silly packumentCache full:https://registry.npmjs.org/@grpc%2fgrpc-js cache-miss
+260 http fetch GET 200 https://registry.npmjs.org/@firebase%2fauth-interop-types 2212ms (cache miss)
+261 silly packumentCache full:https://registry.npmjs.org/@firebase%2fauth-interop-types set size:undefined disposed:false
+262 silly fetch manifest @grpc/proto-loader@^0.7.8
+263 silly packumentCache full:https://registry.npmjs.org/@grpc%2fproto-loader cache-miss
+264 http fetch GET 200 https://registry.npmjs.org/@grpc%2fgrpc-js 267ms (cache miss)
+265 silly packumentCache full:https://registry.npmjs.org/@grpc%2fgrpc-js set size:undefined disposed:false
+266 silly fetch manifest @firebase/firestore-types@3.0.4
+267 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore-types cache-miss
+268 http fetch GET 200 https://registry.npmjs.org/@grpc%2fproto-loader 223ms (cache miss)
+269 silly packumentCache full:https://registry.npmjs.org/@grpc%2fproto-loader set size:undefined disposed:false
+270 silly fetch manifest @firebase/messaging-interop-types@0.2.4
+271 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging-interop-types cache-miss
+272 http fetch GET 200 https://registry.npmjs.org/@firebase%2fdatabase-types 2187ms (cache miss)
+273 silly packumentCache full:https://registry.npmjs.org/@firebase%2fdatabase-types set size:undefined disposed:false
+274 silly fetch manifest @firebase/functions-types@0.6.4
+275 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions-types cache-miss
+276 http fetch GET 200 https://registry.npmjs.org/@firebase%2fmessaging-interop-types 891ms (cache miss)
+277 silly packumentCache full:https://registry.npmjs.org/@firebase%2fmessaging-interop-types set size:undefined disposed:false
+278 silly fetch manifest @firebase/installations-types@0.5.4
+279 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations-types cache-miss
+280 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffirestore-types 1422ms (cache miss)
+281 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffirestore-types set size:undefined disposed:false
+282 silly fetch manifest web-vitals@^4.2.4
+283 silly packumentCache full:https://registry.npmjs.org/web-vitals cache-miss
+284 http fetch GET 200 https://registry.npmjs.org/web-vitals 402ms (cache miss)
+285 silly packumentCache full:https://registry.npmjs.org/web-vitals set size:undefined disposed:false
+286 silly fetch manifest @firebase/performance-types@0.2.4
+287 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance-types cache-miss
+288 http fetch GET 200 https://registry.npmjs.org/@firebase%2ffunctions-types 1690ms (cache miss)
+289 silly packumentCache full:https://registry.npmjs.org/@firebase%2ffunctions-types set size:undefined disposed:false
+290 silly fetch manifest @firebase/remote-config-types@0.5.1
+291 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config-types cache-miss
+292 http fetch GET 200 https://registry.npmjs.org/@firebase%2finstallations-types 2210ms (cache miss)
+293 silly packumentCache full:https://registry.npmjs.org/@firebase%2finstallations-types set size:undefined disposed:false
+294 silly fetch manifest @firebase/storage-types@0.8.4
+295 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage-types cache-miss
+296 http fetch GET 200 https://registry.npmjs.org/@firebase%2fperformance-types 1867ms (cache miss)
+297 silly packumentCache full:https://registry.npmjs.org/@firebase%2fperformance-types set size:undefined disposed:false
+298 http fetch GET 200 https://registry.npmjs.org/@firebase%2fremote-config-types 2506ms (cache miss)
+299 silly packumentCache full:https://registry.npmjs.org/@firebase%2fremote-config-types set size:undefined disposed:false
+300 http fetch GET 200 https://registry.npmjs.org/@firebase%2fstorage-types 2407ms (cache miss)
+301 silly packumentCache full:https://registry.npmjs.org/@firebase%2fstorage-types set size:undefined disposed:false
+302 silly placeDep ROOT @firebase/app-check-interop-types@0.3.4 OK for: @firebase/ai@2.12.0 want: 0.3.4
+303 silly placeDep ROOT @firebase/component@0.7.3 OK for: @firebase/ai@2.12.0 want: 0.7.3
+304 silly placeDep ROOT @firebase/logger@0.5.1 OK for: @firebase/ai@2.12.0 want: 0.5.1
+305 silly placeDep ROOT tslib@2.8.1 OK for: @firebase/ai@2.12.0 want: ^2.1.0
+306 silly placeDep ROOT @firebase/analytics-types@0.8.4 OK for: @firebase/analytics-compat@0.2.28 want: 0.8.4
+307 silly placeDep node_modules/@firebase/app idb@7.1.1 OK for: @firebase/app@0.14.12 want: 7.1.1
+308 silly placeDep ROOT @firebase/app-check-types@0.5.4 OK for: @firebase/app-check-compat@0.4.3 want: 0.5.4
+309 silly fetch manifest @firebase/app-types@0.x
+310 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-types cache-miss
+311 http cache https://registry.npmjs.org/@firebase%2fapp-types 98ms (cache hit)
+312 silly packumentCache full:https://registry.npmjs.org/@firebase%2fapp-types set size:8583221 disposed:false
+313 silly placeDep ROOT @firebase/auth-types@0.13.1 OK for: @firebase/auth-compat@0.6.6 want: 0.13.1
+314 silly placeDep ROOT @firebase/auth-interop-types@0.2.5 OK for: @firebase/data-connect@0.7.0 want: 0.2.5
+315 silly placeDep ROOT faye-websocket@0.11.4 OK for: @firebase/database@1.1.3 want: 0.11.4
+316 silly fetch manifest websocket-driver@>=0.5.1
+317 silly packumentCache full:https://registry.npmjs.org/websocket-driver cache-miss
+318 http fetch GET 200 https://registry.npmjs.org/websocket-driver 327ms (cache miss)
+319 silly packumentCache full:https://registry.npmjs.org/websocket-driver set size:undefined disposed:false
+320 silly placeDep ROOT @firebase/database-types@1.0.20 OK for: @firebase/database-compat@2.1.4 want: 1.0.20
+321 silly placeDep ROOT @firebase/webchannel-wrapper@1.0.6 OK for: @firebase/firestore@4.14.1 want: 1.0.6
+322 silly placeDep ROOT @grpc/grpc-js@1.9.15 OK for: @firebase/firestore@4.14.1 want: ~1.9.0
+323 silly placeDep ROOT @grpc/proto-loader@0.7.15 OK for: @firebase/firestore@4.14.1 want: ^0.7.8
+324 silly fetch manifest long@^5.0.0
+325 silly packumentCache full:https://registry.npmjs.org/long cache-miss
+326 silly fetch manifest protobufjs@^7.2.5
+327 silly packumentCache full:https://registry.npmjs.org/protobufjs cache-miss
+328 silly fetch manifest lodash.camelcase@^4.3.0
+329 silly packumentCache full:https://registry.npmjs.org/lodash.camelcase cache-miss
+330 http fetch GET 200 https://registry.npmjs.org/long 68ms (cache miss)
+331 silly packumentCache full:https://registry.npmjs.org/long set size:undefined disposed:false
+332 http fetch GET 200 https://registry.npmjs.org/lodash.camelcase 357ms (cache miss)
+333 silly packumentCache full:https://registry.npmjs.org/lodash.camelcase set size:undefined disposed:false
+334 http fetch GET 200 https://registry.npmjs.org/protobufjs 432ms (cache miss)
+335 silly packumentCache full:https://registry.npmjs.org/protobufjs set size:undefined disposed:false
+336 silly placeDep ROOT @firebase/firestore-types@3.0.4 OK for: @firebase/firestore-compat@0.4.9 want: 3.0.4
+337 silly placeDep ROOT @firebase/messaging-interop-types@0.2.4 OK for: @firebase/functions@0.13.4 want: 0.2.4
+338 silly placeDep ROOT @firebase/functions-types@0.6.4 OK for: @firebase/functions-compat@0.4.4 want: 0.6.4
+339 silly placeDep node_modules/@firebase/installations idb@7.1.1 OK for: @firebase/installations@0.6.22 want: 7.1.1
+340 silly placeDep ROOT @firebase/installations-types@0.5.4 OK for: @firebase/installations-compat@0.2.22 want: 0.5.4
+341 silly placeDep node_modules/@firebase/messaging idb@7.1.1 OK for: @firebase/messaging@0.12.26 want: 7.1.1
+342 silly placeDep ROOT web-vitals@4.2.4 OK for: @firebase/performance@0.7.12 want: ^4.2.4
+343 silly placeDep ROOT @firebase/performance-types@0.2.4 OK for: @firebase/performance-compat@0.2.25 want: 0.2.4
+344 silly placeDep ROOT @firebase/remote-config-types@0.5.1 OK for: @firebase/remote-config-compat@0.2.24 want: 0.5.1
+345 silly placeDep ROOT @firebase/storage-types@0.8.4 OK for: @firebase/storage-compat@0.4.3 want: 0.8.4
+346 silly placeDep ROOT lodash.camelcase@4.3.0 OK for: @grpc/proto-loader@0.7.15 want: ^4.3.0
+347 silly placeDep ROOT long@5.3.2 OK for: @grpc/proto-loader@0.7.15 want: ^5.0.0
+348 silly placeDep ROOT protobufjs@7.5.6 OK for: @grpc/proto-loader@0.7.15 want: ^7.2.5
+349 silly fetch manifest @protobufjs/path@^1.1.2
+350 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fpath cache-miss
+351 silly fetch manifest @protobufjs/pool@^1.1.0
+352 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fpool cache-miss
+353 silly fetch manifest @protobufjs/utf8@^1.1.1
+354 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2futf8 cache-miss
+355 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2fpool 78ms (cache miss)
+356 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fpool set size:undefined disposed:false
+357 silly fetch manifest @protobufjs/fetch@^1.1.0
+358 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2ffetch cache-miss
+359 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2ffetch 81ms (cache miss)
+360 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2ffetch set size:undefined disposed:false
+361 silly fetch manifest @protobufjs/float@^1.0.2
+362 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2ffloat cache-miss
+363 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2futf8 180ms (cache miss)
+364 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2futf8 set size:undefined disposed:false
+365 silly fetch manifest @protobufjs/base64@^1.1.2
+366 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fbase64 cache-miss
+367 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2fpath 210ms (cache miss)
+368 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fpath set size:undefined disposed:false
+369 silly fetch manifest @protobufjs/codegen@^2.0.5
+370 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fcodegen cache-miss
+371 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2fbase64 154ms (cache miss)
+372 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fbase64 set size:undefined disposed:false
+373 silly fetch manifest @protobufjs/inquire@^1.1.1
+374 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2finquire cache-miss
+375 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2ffloat 190ms (cache miss)
+376 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2ffloat set size:undefined disposed:false
+377 silly fetch manifest @protobufjs/aspromise@^1.1.2
+378 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2faspromise cache-miss
+379 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2fcodegen 201ms (cache miss)
+380 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2fcodegen set size:undefined disposed:false
+381 silly fetch manifest @protobufjs/eventemitter@^1.1.0
+382 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2feventemitter cache-miss
+383 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2finquire 166ms (cache miss)
+384 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2finquire set size:undefined disposed:false
+385 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2faspromise 438ms (cache miss)
+386 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2faspromise set size:undefined disposed:false
+387 http fetch GET 200 https://registry.npmjs.org/@protobufjs%2feventemitter 689ms (cache miss)
+388 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2feventemitter set size:undefined disposed:false
+389 silly placeDep ROOT websocket-driver@0.7.4 OK for: faye-websocket@0.11.4 want: >=0.5.1
+390 silly fetch manifest http-parser-js@>=0.5.1
+391 silly packumentCache full:https://registry.npmjs.org/http-parser-js cache-miss
+392 silly fetch manifest websocket-extensions@>=0.1.1
+393 silly packumentCache full:https://registry.npmjs.org/websocket-extensions cache-miss
+394 http fetch GET 200 https://registry.npmjs.org/http-parser-js 140ms (cache miss)
+395 silly packumentCache full:https://registry.npmjs.org/http-parser-js set size:undefined disposed:false
+396 http fetch GET 200 https://registry.npmjs.org/websocket-extensions 319ms (cache miss)
+397 silly packumentCache full:https://registry.npmjs.org/websocket-extensions set size:undefined disposed:false
+398 silly placeDep ROOT @protobufjs/aspromise@1.1.2 OK for: protobufjs@7.5.6 want: ^1.1.2
+399 silly placeDep ROOT @protobufjs/base64@1.1.2 OK for: protobufjs@7.5.6 want: ^1.1.2
+400 silly placeDep ROOT @protobufjs/codegen@2.0.5 OK for: protobufjs@7.5.6 want: ^2.0.5
+401 silly placeDep ROOT @protobufjs/eventemitter@1.1.0 OK for: protobufjs@7.5.6 want: ^1.1.0
+402 silly placeDep ROOT @protobufjs/fetch@1.1.0 OK for: protobufjs@7.5.6 want: ^1.1.0
+403 silly placeDep ROOT @protobufjs/float@1.0.2 OK for: protobufjs@7.5.6 want: ^1.0.2
+404 silly placeDep ROOT @protobufjs/inquire@1.1.1 OK for: protobufjs@7.5.6 want: ^1.1.1
+405 silly placeDep ROOT @protobufjs/path@1.1.2 OK for: protobufjs@7.5.6 want: ^1.1.2
+406 silly placeDep ROOT @protobufjs/pool@1.1.0 OK for: protobufjs@7.5.6 want: ^1.1.0
+407 silly placeDep ROOT @protobufjs/utf8@1.1.1 OK for: protobufjs@7.5.6 want: ^1.1.1
+408 silly fetch manifest @protobufjs/inquire@^1.1.0
+409 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2finquire cache-miss
+410 http cache https://registry.npmjs.org/@protobufjs%2finquire 6ms (cache hit)
+411 silly packumentCache full:https://registry.npmjs.org/@protobufjs%2finquire set size:8827 disposed:false
+412 silly placeDep ROOT http-parser-js@0.5.10 OK for: websocket-driver@0.7.4 want: >=0.5.1
+413 silly placeDep ROOT websocket-extensions@0.1.4 OK for: websocket-driver@0.7.4 want: >=0.1.1
+414 silly reify moves {}
+415 http cache websocket-extensions@https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.4.tgz 0ms (cache hit)
+416 http cache http-parser-js@https://registry.npmjs.org/http-parser-js/-/http-parser-js-0.5.10.tgz 0ms (cache hit)
+417 http cache @protobufjs/utf8@https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.1.tgz 0ms (cache hit)
+418 http cache @protobufjs/float@https://registry.npmjs.org/@protobufjs/float/-/float-1.0.2.tgz 0ms (cache hit)
+419 http cache @protobufjs/path@https://registry.npmjs.org/@protobufjs/path/-/path-1.1.2.tgz 0ms (cache hit)
+420 http cache @protobufjs/inquire@https://registry.npmjs.org/@protobufjs/inquire/-/inquire-1.1.1.tgz 0ms (cache hit)
+421 http cache @protobufjs/fetch@https://registry.npmjs.org/@protobufjs/fetch/-/fetch-1.1.0.tgz 0ms (cache hit)
+422 http cache @protobufjs/codegen@https://registry.npmjs.org/@protobufjs/codegen/-/codegen-2.0.5.tgz 0ms (cache hit)
+423 http cache @protobufjs/eventemitter@https://registry.npmjs.org/@protobufjs/eventemitter/-/eventemitter-1.1.0.tgz 1ms (cache hit)
+424 http cache websocket-driver@https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.7.4.tgz 0ms (cache hit)
+425 http cache protobufjs@https://registry.npmjs.org/protobufjs/-/protobufjs-7.5.6.tgz 0ms (cache hit)
+426 http cache @protobufjs/base64@https://registry.npmjs.org/@protobufjs/base64/-/base64-1.1.2.tgz 0ms (cache hit)
+427 http cache @protobufjs/aspromise@https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz 0ms (cache hit)
+428 http cache long@https://registry.npmjs.org/long/-/long-5.3.2.tgz 0ms (cache hit)
+429 http cache lodash.camelcase@https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz 0ms (cache hit)
+430 http cache @firebase/storage-types@https://registry.npmjs.org/@firebase/storage-types/-/storage-types-0.8.4.tgz 0ms (cache hit)
+431 http cache @firebase/remote-config-types@https://registry.npmjs.org/@firebase/remote-config-types/-/remote-config-types-0.5.1.tgz 0ms (cache hit)
+432 http cache @firebase/installations-types@https://registry.npmjs.org/@firebase/installations-types/-/installations-types-0.5.4.tgz 0ms (cache hit)
+433 http cache @firebase/functions-types@https://registry.npmjs.org/@firebase/functions-types/-/functions-types-0.6.4.tgz 0ms (cache hit)
+434 http cache @firebase/messaging-interop-types@https://registry.npmjs.org/@firebase/messaging-interop-types/-/messaging-interop-types-0.2.4.tgz 0ms (cache hit)
+435 http cache @firebase/firestore-types@https://registry.npmjs.org/@firebase/firestore-types/-/firestore-types-3.0.4.tgz 0ms (cache hit)
+436 http cache @grpc/proto-loader@https://registry.npmjs.org/@grpc/proto-loader/-/proto-loader-0.7.15.tgz 0ms (cache hit)
+437 http cache @grpc/grpc-js@https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.9.15.tgz 0ms (cache hit)
+438 http cache faye-websocket@https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.4.tgz 0ms (cache hit)
+439 http cache @firebase/webchannel-wrapper@https://registry.npmjs.org/@firebase/webchannel-wrapper/-/webchannel-wrapper-1.0.6.tgz 0ms (cache hit)
+440 http cache @firebase/database-types@https://registry.npmjs.org/@firebase/database-types/-/database-types-1.0.20.tgz 0ms (cache hit)
+441 http cache @firebase/auth-interop-types@https://registry.npmjs.org/@firebase/auth-interop-types/-/auth-interop-types-0.2.5.tgz 0ms (cache hit)
+442 http cache @firebase/auth-types@https://registry.npmjs.org/@firebase/auth-types/-/auth-types-0.13.1.tgz 0ms (cache hit)
+443 http cache tslib@https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz 0ms (cache hit)
+444 http cache @firebase/analytics-types@https://registry.npmjs.org/@firebase/analytics-types/-/analytics-types-0.8.4.tgz 0ms (cache hit)
+445 http cache @firebase/app-check-types@https://registry.npmjs.org/@firebase/app-check-types/-/app-check-types-0.5.4.tgz 0ms (cache hit)
+446 http cache @firebase/logger@https://registry.npmjs.org/@firebase/logger/-/logger-0.5.1.tgz 0ms (cache hit)
+447 http cache @firebase/component@https://registry.npmjs.org/@firebase/component/-/component-0.7.3.tgz 0ms (cache hit)
+448 http cache @firebase/app-check-interop-types@https://registry.npmjs.org/@firebase/app-check-interop-types/-/app-check-interop-types-0.3.4.tgz 0ms (cache hit)
+449 http cache @firebase/util@https://registry.npmjs.org/@firebase/util/-/util-1.15.1.tgz 0ms (cache hit)
+450 http cache @firebase/storage-compat@https://registry.npmjs.org/@firebase/storage-compat/-/storage-compat-0.4.3.tgz 0ms (cache hit)
+451 http cache @firebase/storage@https://registry.npmjs.org/@firebase/storage/-/storage-0.14.3.tgz 0ms (cache hit)
+452 http cache @firebase/remote-config@https://registry.npmjs.org/@firebase/remote-config/-/remote-config-0.8.3.tgz 0ms (cache hit)
+453 http cache @firebase/performance-compat@https://registry.npmjs.org/@firebase/performance-compat/-/performance-compat-0.2.25.tgz 0ms (cache hit)
+454 http cache @firebase/remote-config-compat@https://registry.npmjs.org/@firebase/remote-config-compat/-/remote-config-compat-0.2.24.tgz 0ms (cache hit)
+455 http cache @firebase/performance@https://registry.npmjs.org/@firebase/performance/-/performance-0.7.12.tgz 0ms (cache hit)
+456 http cache @firebase/messaging-compat@https://registry.npmjs.org/@firebase/messaging-compat/-/messaging-compat-0.2.26.tgz 0ms (cache hit)
+457 http cache @firebase/performance-types@https://registry.npmjs.org/@firebase/performance-types/-/performance-types-0.2.4.tgz 0ms (cache hit)
+458 http cache @firebase/messaging@https://registry.npmjs.org/@firebase/messaging/-/messaging-0.12.26.tgz 0ms (cache hit)
+459 http cache @firebase/installations-compat@https://registry.npmjs.org/@firebase/installations-compat/-/installations-compat-0.2.22.tgz 0ms (cache hit)
+460 http cache @firebase/installations@https://registry.npmjs.org/@firebase/installations/-/installations-0.6.22.tgz 0ms (cache hit)
+461 http cache @firebase/functions-compat@https://registry.npmjs.org/@firebase/functions-compat/-/functions-compat-0.4.4.tgz 0ms (cache hit)
+462 http cache @firebase/functions@https://registry.npmjs.org/@firebase/functions/-/functions-0.13.4.tgz 0ms (cache hit)
+463 http cache @firebase/firestore-compat@https://registry.npmjs.org/@firebase/firestore-compat/-/firestore-compat-0.4.9.tgz 0ms (cache hit)
+464 http cache @firebase/firestore@https://registry.npmjs.org/@firebase/firestore/-/firestore-4.14.1.tgz 0ms (cache hit)
+465 http cache @firebase/database-compat@https://registry.npmjs.org/@firebase/database-compat/-/database-compat-2.1.4.tgz 0ms (cache hit)
+466 http cache @firebase/database@https://registry.npmjs.org/@firebase/database/-/database-1.1.3.tgz 0ms (cache hit)
+467 http cache @firebase/data-connect@https://registry.npmjs.org/@firebase/data-connect/-/data-connect-0.7.0.tgz 0ms (cache hit)
+468 http cache @firebase/auth@https://registry.npmjs.org/@firebase/auth/-/auth-1.13.1.tgz 0ms (cache hit)
+469 http cache @firebase/app-check-compat@https://registry.npmjs.org/@firebase/app-check-compat/-/app-check-compat-0.4.3.tgz 0ms (cache hit)
+470 http cache @firebase/app-check@https://registry.npmjs.org/@firebase/app-check/-/app-check-0.11.3.tgz 0ms (cache hit)
+471 http cache @firebase/app-compat@https://registry.npmjs.org/@firebase/app-compat/-/app-compat-0.5.12.tgz 0ms (cache hit)
+472 http cache @firebase/analytics-compat@https://registry.npmjs.org/@firebase/analytics-compat/-/analytics-compat-0.2.28.tgz 0ms (cache hit)
+473 http cache @firebase/analytics@https://registry.npmjs.org/@firebase/analytics/-/analytics-0.10.22.tgz 0ms (cache hit)
+474 http cache @firebase/auth-compat@https://registry.npmjs.org/@firebase/auth-compat/-/auth-compat-0.6.6.tgz 0ms (cache hit)
+475 http cache @firebase/app-types@https://registry.npmjs.org/@firebase/app-types/-/app-types-0.9.5.tgz 0ms (cache hit)
+476 http cache @firebase/app@https://registry.npmjs.org/@firebase/app/-/app-0.14.12.tgz 0ms (cache hit)
+477 http cache @firebase/ai@https://registry.npmjs.org/@firebase/ai/-/ai-2.12.0.tgz 0ms (cache hit)
+478 http cache @react-native-async-storage/async-storage@https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-3.0.2.tgz 0ms (cache hit)
+479 http cache idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 0ms (cache hit)
+480 http cache idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 0ms (cache hit)
+481 http cache firebase@https://registry.npmjs.org/firebase/-/firebase-12.13.0.tgz 0ms (cache hit)
+482 silly tarball no local data for websocket-extensions@https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.4.tgz. Extracting by manifest.
+483 silly tarball no local data for http-parser-js@https://registry.npmjs.org/http-parser-js/-/http-parser-js-0.5.10.tgz. Extracting by manifest.
+484 http cache @protobufjs/pool@https://registry.npmjs.org/@protobufjs/pool/-/pool-1.1.0.tgz 0ms (cache hit)
+485 http cache web-vitals@https://registry.npmjs.org/web-vitals/-/web-vitals-4.2.4.tgz 0ms (cache hit)
+486 http cache idb@https://registry.npmjs.org/idb/-/idb-8.0.3.tgz 0ms (cache hit)
+487 silly tarball no local data for @protobufjs/utf8@https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.1.tgz. Extracting by manifest.
+488 silly tarball no local data for @protobufjs/float@https://registry.npmjs.org/@protobufjs/float/-/float-1.0.2.tgz. Extracting by manifest.
+489 silly tarball no local data for @protobufjs/path@https://registry.npmjs.org/@protobufjs/path/-/path-1.1.2.tgz. Extracting by manifest.
+490 silly tarball no local data for @protobufjs/inquire@https://registry.npmjs.org/@protobufjs/inquire/-/inquire-1.1.1.tgz. Extracting by manifest.
+491 silly tarball no local data for @protobufjs/fetch@https://registry.npmjs.org/@protobufjs/fetch/-/fetch-1.1.0.tgz. Extracting by manifest.
+492 silly tarball no local data for @protobufjs/codegen@https://registry.npmjs.org/@protobufjs/codegen/-/codegen-2.0.5.tgz. Extracting by manifest.
+493 silly tarball no local data for @protobufjs/eventemitter@https://registry.npmjs.org/@protobufjs/eventemitter/-/eventemitter-1.1.0.tgz. Extracting by manifest.
+494 silly tarball no local data for websocket-driver@https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.7.4.tgz. Extracting by manifest.
+495 silly tarball no local data for protobufjs@https://registry.npmjs.org/protobufjs/-/protobufjs-7.5.6.tgz. Extracting by manifest.
+496 silly tarball no local data for @protobufjs/base64@https://registry.npmjs.org/@protobufjs/base64/-/base64-1.1.2.tgz. Extracting by manifest.
+497 silly tarball no local data for @protobufjs/aspromise@https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz. Extracting by manifest.
+498 silly tarball no local data for long@https://registry.npmjs.org/long/-/long-5.3.2.tgz. Extracting by manifest.
+499 silly tarball no local data for lodash.camelcase@https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz. Extracting by manifest.
+500 silly tarball no local data for @firebase/storage-types@https://registry.npmjs.org/@firebase/storage-types/-/storage-types-0.8.4.tgz. Extracting by manifest.
+501 silly tarball no local data for @firebase/remote-config-types@https://registry.npmjs.org/@firebase/remote-config-types/-/remote-config-types-0.5.1.tgz. Extracting by manifest.
+502 silly tarball no local data for @firebase/installations-types@https://registry.npmjs.org/@firebase/installations-types/-/installations-types-0.5.4.tgz. Extracting by manifest.
+503 http cache idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 0ms (cache hit)
+504 silly tarball no local data for @firebase/functions-types@https://registry.npmjs.org/@firebase/functions-types/-/functions-types-0.6.4.tgz. Extracting by manifest.
+505 silly tarball no local data for @firebase/messaging-interop-types@https://registry.npmjs.org/@firebase/messaging-interop-types/-/messaging-interop-types-0.2.4.tgz. Extracting by manifest.
+506 silly tarball no local data for @firebase/firestore-types@https://registry.npmjs.org/@firebase/firestore-types/-/firestore-types-3.0.4.tgz. Extracting by manifest.
+507 silly tarball no local data for @grpc/proto-loader@https://registry.npmjs.org/@grpc/proto-loader/-/proto-loader-0.7.15.tgz. Extracting by manifest.
+508 silly tarball no local data for @grpc/grpc-js@https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.9.15.tgz. Extracting by manifest.
+509 silly tarball no local data for faye-websocket@https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.4.tgz. Extracting by manifest.
+510 silly tarball no local data for @firebase/webchannel-wrapper@https://registry.npmjs.org/@firebase/webchannel-wrapper/-/webchannel-wrapper-1.0.6.tgz. Extracting by manifest.
+511 silly tarball no local data for @firebase/database-types@https://registry.npmjs.org/@firebase/database-types/-/database-types-1.0.20.tgz. Extracting by manifest.
+512 silly tarball no local data for @firebase/auth-interop-types@https://registry.npmjs.org/@firebase/auth-interop-types/-/auth-interop-types-0.2.5.tgz. Extracting by manifest.
+513 silly tarball no local data for @firebase/auth-types@https://registry.npmjs.org/@firebase/auth-types/-/auth-types-0.13.1.tgz. Extracting by manifest.
+514 silly tarball no local data for tslib@https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz. Extracting by manifest.
+515 silly tarball no local data for @firebase/analytics-types@https://registry.npmjs.org/@firebase/analytics-types/-/analytics-types-0.8.4.tgz. Extracting by manifest.
+516 silly tarball no local data for @firebase/app-check-types@https://registry.npmjs.org/@firebase/app-check-types/-/app-check-types-0.5.4.tgz. Extracting by manifest.
+517 silly tarball no local data for @firebase/logger@https://registry.npmjs.org/@firebase/logger/-/logger-0.5.1.tgz. Extracting by manifest.
+518 silly tarball no local data for @firebase/component@https://registry.npmjs.org/@firebase/component/-/component-0.7.3.tgz. Extracting by manifest.
+519 silly tarball no local data for @firebase/app-check-interop-types@https://registry.npmjs.org/@firebase/app-check-interop-types/-/app-check-interop-types-0.3.4.tgz. Extracting by manifest.
+520 silly tarball no local data for @firebase/util@https://registry.npmjs.org/@firebase/util/-/util-1.15.1.tgz. Extracting by manifest.
+521 silly tarball no local data for @firebase/storage-compat@https://registry.npmjs.org/@firebase/storage-compat/-/storage-compat-0.4.3.tgz. Extracting by manifest.
+522 silly tarball no local data for @firebase/storage@https://registry.npmjs.org/@firebase/storage/-/storage-0.14.3.tgz. Extracting by manifest.
+523 silly tarball no local data for @firebase/remote-config@https://registry.npmjs.org/@firebase/remote-config/-/remote-config-0.8.3.tgz. Extracting by manifest.
+524 silly tarball no local data for @firebase/performance-compat@https://registry.npmjs.org/@firebase/performance-compat/-/performance-compat-0.2.25.tgz. Extracting by manifest.
+525 silly tarball no local data for @firebase/remote-config-compat@https://registry.npmjs.org/@firebase/remote-config-compat/-/remote-config-compat-0.2.24.tgz. Extracting by manifest.
+526 silly tarball no local data for @firebase/performance@https://registry.npmjs.org/@firebase/performance/-/performance-0.7.12.tgz. Extracting by manifest.
+527 silly tarball no local data for @firebase/messaging-compat@https://registry.npmjs.org/@firebase/messaging-compat/-/messaging-compat-0.2.26.tgz. Extracting by manifest.
+528 silly tarball no local data for @firebase/performance-types@https://registry.npmjs.org/@firebase/performance-types/-/performance-types-0.2.4.tgz. Extracting by manifest.
+529 silly tarball no local data for @firebase/messaging@https://registry.npmjs.org/@firebase/messaging/-/messaging-0.12.26.tgz. Extracting by manifest.
+530 silly tarball no local data for @firebase/installations-compat@https://registry.npmjs.org/@firebase/installations-compat/-/installations-compat-0.2.22.tgz. Extracting by manifest.
+531 silly tarball no local data for @firebase/installations@https://registry.npmjs.org/@firebase/installations/-/installations-0.6.22.tgz. Extracting by manifest.
+532 silly tarball no local data for @firebase/functions-compat@https://registry.npmjs.org/@firebase/functions-compat/-/functions-compat-0.4.4.tgz. Extracting by manifest.
+533 silly tarball no local data for @firebase/functions@https://registry.npmjs.org/@firebase/functions/-/functions-0.13.4.tgz. Extracting by manifest.
+534 silly tarball no local data for @firebase/firestore-compat@https://registry.npmjs.org/@firebase/firestore-compat/-/firestore-compat-0.4.9.tgz. Extracting by manifest.
+535 silly tarball no local data for @firebase/firestore@https://registry.npmjs.org/@firebase/firestore/-/firestore-4.14.1.tgz. Extracting by manifest.
+536 silly tarball no local data for @firebase/database-compat@https://registry.npmjs.org/@firebase/database-compat/-/database-compat-2.1.4.tgz. Extracting by manifest.
+537 silly tarball no local data for @firebase/database@https://registry.npmjs.org/@firebase/database/-/database-1.1.3.tgz. Extracting by manifest.
+538 silly tarball no local data for @firebase/data-connect@https://registry.npmjs.org/@firebase/data-connect/-/data-connect-0.7.0.tgz. Extracting by manifest.
+539 silly tarball no local data for @firebase/auth@https://registry.npmjs.org/@firebase/auth/-/auth-1.13.1.tgz. Extracting by manifest.
+540 silly tarball no local data for @firebase/app-check-compat@https://registry.npmjs.org/@firebase/app-check-compat/-/app-check-compat-0.4.3.tgz. Extracting by manifest.
+541 silly tarball no local data for @firebase/app-check@https://registry.npmjs.org/@firebase/app-check/-/app-check-0.11.3.tgz. Extracting by manifest.
+542 silly tarball no local data for @firebase/app-compat@https://registry.npmjs.org/@firebase/app-compat/-/app-compat-0.5.12.tgz. Extracting by manifest.
+543 silly tarball no local data for @firebase/analytics-compat@https://registry.npmjs.org/@firebase/analytics-compat/-/analytics-compat-0.2.28.tgz. Extracting by manifest.
+544 silly tarball no local data for @firebase/analytics@https://registry.npmjs.org/@firebase/analytics/-/analytics-0.10.22.tgz. Extracting by manifest.
+545 silly tarball no local data for @firebase/auth-compat@https://registry.npmjs.org/@firebase/auth-compat/-/auth-compat-0.6.6.tgz. Extracting by manifest.
+546 silly tarball no local data for @firebase/app-types@https://registry.npmjs.org/@firebase/app-types/-/app-types-0.9.5.tgz. Extracting by manifest.
+547 silly tarball no local data for @firebase/app@https://registry.npmjs.org/@firebase/app/-/app-0.14.12.tgz. Extracting by manifest.
+548 silly tarball no local data for @firebase/ai@https://registry.npmjs.org/@firebase/ai/-/ai-2.12.0.tgz. Extracting by manifest.
+549 silly tarball no local data for @react-native-async-storage/async-storage@https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-3.0.2.tgz. Extracting by manifest.
+550 silly tarball no local data for idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz. Extracting by manifest.
+551 silly tarball no local data for idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz. Extracting by manifest.
+552 silly tarball no local data for firebase@https://registry.npmjs.org/firebase/-/firebase-12.13.0.tgz. Extracting by manifest.
+553 silly tarball no local data for @protobufjs/pool@https://registry.npmjs.org/@protobufjs/pool/-/pool-1.1.0.tgz. Extracting by manifest.
+554 silly tarball no local data for web-vitals@https://registry.npmjs.org/web-vitals/-/web-vitals-4.2.4.tgz. Extracting by manifest.
+555 silly tarball no local data for idb@https://registry.npmjs.org/idb/-/idb-8.0.3.tgz. Extracting by manifest.
+556 silly tarball no local data for idb@https://registry.npmjs.org/idb/-/idb-7.1.1.tgz. Extracting by manifest.
+557 http fetch GET 200 https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.1.tgz 520ms (cache miss)
+558 http fetch GET 200 https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.4.tgz 542ms (cache miss)
+559 http fetch GET 200 https://registry.npmjs.org/http-parser-js/-/http-parser-js-0.5.10.tgz 617ms (cache miss)
+560 http fetch GET 200 https://registry.npmjs.org/@protobufjs/fetch/-/fetch-1.1.0.tgz 723ms (cache miss)
+561 http fetch GET 200 https://registry.npmjs.org/@firebase/installations-types/-/installations-types-0.5.4.tgz 929ms (cache miss)
+562 http fetch GET 200 https://registry.npmjs.org/@firebase/remote-config-types/-/remote-config-types-0.5.1.tgz 947ms (cache miss)
+563 http fetch GET 200 https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz 999ms (cache miss)
+564 http fetch GET 200 https://registry.npmjs.org/@protobufjs/eventemitter/-/eventemitter-1.1.0.tgz 1034ms (cache miss)
+565 http fetch GET 200 https://registry.npmjs.org/@protobufjs/codegen/-/codegen-2.0.5.tgz 1066ms (cache miss)
+566 http fetch GET 200 https://registry.npmjs.org/@firebase/messaging-interop-types/-/messaging-interop-types-0.2.4.tgz 1184ms (cache miss)
+567 http fetch GET 200 https://registry.npmjs.org/@firebase/functions-types/-/functions-types-0.6.4.tgz 1194ms (cache miss)
+568 http fetch GET 200 https://registry.npmjs.org/@firebase/firestore-types/-/firestore-types-3.0.4.tgz 1196ms (cache miss)
+569 http fetch GET 200 https://registry.npmjs.org/@firebase/storage-types/-/storage-types-0.8.4.tgz 1229ms (cache miss)
+570 http fetch GET 200 https://registry.npmjs.org/@protobufjs/path/-/path-1.1.2.tgz 1310ms (cache miss)
+571 http fetch GET 200 https://registry.npmjs.org/@protobufjs/base64/-/base64-1.1.2.tgz 1366ms (cache miss)
+572 http fetch GET 200 https://registry.npmjs.org/@firebase/auth-interop-types/-/auth-interop-types-0.2.5.tgz 1346ms (cache miss)
+573 http fetch GET 200 https://registry.npmjs.org/@firebase/auth-types/-/auth-types-0.13.1.tgz 1568ms (cache miss)
+574 http fetch GET 200 https://registry.npmjs.org/@firebase/app-check-interop-types/-/app-check-interop-types-0.3.4.tgz 1721ms (cache miss)
+575 http fetch GET 200 https://registry.npmjs.org/@firebase/analytics-types/-/analytics-types-0.8.4.tgz 1747ms (cache miss)
+576 http fetch GET 200 https://registry.npmjs.org/@protobufjs/float/-/float-1.0.2.tgz 1814ms (cache miss)
+577 http fetch GET 200 https://registry.npmjs.org/long/-/long-5.3.2.tgz 1876ms (cache miss)
+578 http fetch GET 200 https://registry.npmjs.org/@firebase/app-check-types/-/app-check-types-0.5.4.tgz 2001ms (cache miss)
+579 http fetch GET 200 https://registry.npmjs.org/@firebase/performance-compat/-/performance-compat-0.2.25.tgz 1998ms (cache miss)
+580 http fetch GET 200 https://registry.npmjs.org/@firebase/installations-compat/-/installations-compat-0.2.22.tgz 2073ms (cache miss)
+581 http fetch GET 200 https://registry.npmjs.org/@firebase/performance-types/-/performance-types-0.2.4.tgz 2084ms (cache miss)
+582 http fetch GET 200 https://registry.npmjs.org/@protobufjs/inquire/-/inquire-1.1.1.tgz 2158ms (cache miss)
+583 http fetch GET 200 https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz 2581ms (cache miss)
+584 http fetch GET 200 https://registry.npmjs.org/@firebase/database-types/-/database-types-1.0.20.tgz 2654ms (cache miss)
+585 http fetch GET 200 https://registry.npmjs.org/@firebase/analytics-compat/-/analytics-compat-0.2.28.tgz 2870ms (cache miss)
+586 http fetch GET 200 https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.4.tgz 3015ms (cache miss)
+587 http fetch GET 200 https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz 3070ms (cache miss)
+588 http fetch GET 200 https://registry.npmjs.org/@firebase/app-types/-/app-types-0.9.5.tgz 3001ms (cache miss)
+589 http fetch GET 200 https://registry.npmjs.org/@protobufjs/pool/-/pool-1.1.0.tgz 3114ms (cache miss)
+590 http fetch GET 200 https://registry.npmjs.org/@grpc/proto-loader/-/proto-loader-0.7.15.tgz 3494ms (cache miss)
+591 http fetch GET 200 https://registry.npmjs.org/@firebase/logger/-/logger-0.5.1.tgz 5876ms (cache miss)
+592 http fetch GET 200 https://registry.npmjs.org/idb/-/idb-8.0.3.tgz 5940ms (cache miss)
+593 http fetch GET 200 https://registry.npmjs.org/@firebase/remote-config-compat/-/remote-config-compat-0.2.24.tgz 6115ms (cache miss)
+594 http fetch GET 200 https://registry.npmjs.org/@firebase/webchannel-wrapper/-/webchannel-wrapper-1.0.6.tgz 6269ms (cache miss)
+595 http fetch GET 200 https://registry.npmjs.org/@firebase/messaging-compat/-/messaging-compat-0.2.26.tgz 6438ms (cache miss)
+596 http fetch GET 200 https://registry.npmjs.org/@firebase/app-check-compat/-/app-check-compat-0.4.3.tgz 6479ms (cache miss)
+597 http fetch GET 200 https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.7.4.tgz 6636ms (cache miss)
+598 http fetch GET 200 https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 6549ms (cache miss)
+599 http fetch GET 200 https://registry.npmjs.org/@firebase/functions-compat/-/functions-compat-0.4.4.tgz 6637ms (cache miss)
+600 http fetch GET 200 https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 6986ms (cache miss)
+601 http fetch GET 200 https://registry.npmjs.org/idb/-/idb-7.1.1.tgz 7060ms (cache miss)
+602 http fetch GET 200 https://registry.npmjs.org/@firebase/component/-/component-0.7.3.tgz 7206ms (cache miss)
+603 http fetch GET 200 https://registry.npmjs.org/@firebase/storage-compat/-/storage-compat-0.4.3.tgz 8724ms (cache miss)
+604 http fetch GET 200 https://registry.npmjs.org/@firebase/functions/-/functions-0.13.4.tgz 8818ms (cache miss)
+605 http fetch GET 200 https://registry.npmjs.org/@firebase/app-compat/-/app-compat-0.5.12.tgz 10126ms (cache miss)
+606 http fetch GET 200 https://registry.npmjs.org/@firebase/analytics/-/analytics-0.10.22.tgz 10678ms (cache miss)
+607 http fetch GET 200 https://registry.npmjs.org/@firebase/app/-/app-0.14.12.tgz 10784ms (cache miss)
+608 http fetch GET 200 https://registry.npmjs.org/@firebase/remote-config/-/remote-config-0.8.3.tgz 11447ms (cache miss)
+609 http fetch GET 200 https://registry.npmjs.org/@firebase/performance/-/performance-0.7.12.tgz 11449ms (cache miss)
+610 http fetch GET 200 https://registry.npmjs.org/@firebase/app-check/-/app-check-0.11.3.tgz 11656ms (cache miss)
+611 http fetch GET 200 https://registry.npmjs.org/@firebase/database-compat/-/database-compat-2.1.4.tgz 12194ms (cache miss)
+612 http fetch GET 200 https://registry.npmjs.org/@firebase/installations/-/installations-0.6.22.tgz 12553ms (cache miss)
+613 http fetch GET 200 https://registry.npmjs.org/@firebase/auth-compat/-/auth-compat-0.6.6.tgz 12600ms (cache miss)
+614 http fetch GET 200 https://registry.npmjs.org/@firebase/firestore-compat/-/firestore-compat-0.4.9.tgz 13122ms (cache miss)
+615 http fetch GET 200 https://registry.npmjs.org/protobufjs/-/protobufjs-7.5.6.tgz 14836ms (cache miss)
+616 http fetch GET 200 https://registry.npmjs.org/@firebase/util/-/util-1.15.1.tgz 14859ms (cache miss)
+617 http fetch GET 200 https://registry.npmjs.org/@firebase/storage/-/storage-0.14.3.tgz 15964ms (cache miss)
+618 http fetch GET 200 https://registry.npmjs.org/@firebase/messaging/-/messaging-0.12.26.tgz 16362ms (cache miss)
+619 http fetch GET 200 https://registry.npmjs.org/@firebase/data-connect/-/data-connect-0.7.0.tgz 16374ms (cache miss)
+620 http fetch GET 200 https://registry.npmjs.org/web-vitals/-/web-vitals-4.2.4.tgz 16767ms (cache miss)
+621 http fetch GET 200 https://registry.npmjs.org/@firebase/ai/-/ai-2.12.0.tgz 18110ms (cache miss)
+622 http fetch GET 200 https://registry.npmjs.org/@firebase/database/-/database-1.1.3.tgz 22547ms (cache miss)
+623 http fetch GET 200 https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.9.15.tgz 28807ms (cache miss)
+624 http fetch GET 200 https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-3.0.2.tgz 29072ms (cache miss)
+625 http fetch GET 200 https://registry.npmjs.org/@firebase/auth/-/auth-1.13.1.tgz 56098ms (cache miss)
+626 http fetch GET 200 https://registry.npmjs.org/@firebase/firestore/-/firestore-4.14.1.tgz 66408ms (cache miss)
+627 http fetch GET 200 https://registry.npmjs.org/firebase/-/firebase-12.13.0.tgz 72756ms (cache miss)
+628 info run @firebase/util@1.15.1 postinstall node_modules/@firebase/util node ./postinstall.js
+629 info run protobufjs@7.5.6 postinstall node_modules/protobufjs node scripts/postinstall
+630 info run @firebase/util@1.15.1 postinstall { code: 0, signal: null }
+631 info run protobufjs@7.5.6 postinstall { code: 0, signal: null }
+632 silly ADD node_modules/websocket-extensions
+633 silly ADD node_modules/http-parser-js
+634 silly ADD node_modules/@protobufjs/utf8
+635 silly ADD node_modules/@protobufjs/pool
+636 silly ADD node_modules/@protobufjs/path
+637 silly ADD node_modules/@protobufjs/inquire
+638 silly ADD node_modules/@protobufjs/float
+639 silly ADD node_modules/@protobufjs/fetch
+640 silly ADD node_modules/@protobufjs/eventemitter
+641 silly ADD node_modules/@protobufjs/codegen
+642 silly ADD node_modules/@protobufjs/base64
+643 silly ADD node_modules/@protobufjs/aspromise
+644 silly ADD node_modules/websocket-driver
+645 silly ADD node_modules/protobufjs
+646 silly ADD node_modules/long
+647 silly ADD node_modules/lodash.camelcase
+648 silly ADD node_modules/@firebase/storage-types
+649 silly ADD node_modules/@firebase/remote-config-types
+650 silly ADD node_modules/@firebase/performance-types
+651 silly ADD node_modules/web-vitals
+652 silly ADD node_modules/@firebase/installations-types
+653 silly ADD node_modules/@firebase/functions-types
+654 silly ADD node_modules/@firebase/messaging-interop-types
+655 silly ADD node_modules/@firebase/firestore-types
+656 silly ADD node_modules/@grpc/proto-loader
+657 silly ADD node_modules/@grpc/grpc-js
+658 silly ADD node_modules/@firebase/webchannel-wrapper
+659 silly ADD node_modules/@firebase/database-types
+660 silly ADD node_modules/faye-websocket
+661 silly ADD node_modules/@firebase/auth-interop-types
+662 silly ADD node_modules/@firebase/auth-types
+663 silly ADD node_modules/@firebase/app-check-types
+664 silly ADD node_modules/@firebase/analytics-types
+665 silly ADD node_modules/tslib
+666 silly ADD node_modules/@firebase/logger
+667 silly ADD node_modules/@firebase/component
+668 silly ADD node_modules/@firebase/app-check-interop-types
+669 silly ADD node_modules/@firebase/util
+670 silly ADD node_modules/@firebase/storage-compat
+671 silly ADD node_modules/@firebase/storage
+672 silly ADD node_modules/@firebase/remote-config-compat
+673 silly ADD node_modules/@firebase/remote-config
+674 silly ADD node_modules/@firebase/performance-compat
+675 silly ADD node_modules/@firebase/performance
+676 silly ADD node_modules/@firebase/messaging-compat
+677 silly ADD node_modules/@firebase/messaging
+678 silly ADD node_modules/@firebase/messaging/node_modules/idb
+679 silly ADD node_modules/@firebase/installations-compat
+680 silly ADD node_modules/@firebase/installations
+681 silly ADD node_modules/@firebase/installations/node_modules/idb
+682 silly ADD node_modules/@firebase/functions-compat
+683 silly ADD node_modules/@firebase/functions
+684 silly ADD node_modules/@firebase/firestore-compat
+685 silly ADD node_modules/@firebase/firestore
+686 silly ADD node_modules/@firebase/database-compat
+687 silly ADD node_modules/@firebase/database
+688 silly ADD node_modules/@firebase/data-connect
+689 silly ADD node_modules/@firebase/auth-compat
+690 silly ADD node_modules/@firebase/auth
+691 silly ADD node_modules/@firebase/app-check-compat
+692 silly ADD node_modules/@firebase/app-check
+693 silly ADD node_modules/@firebase/app-compat
+694 silly ADD node_modules/@firebase/analytics-compat
+695 silly ADD node_modules/@firebase/analytics
+696 silly ADD node_modules/@firebase/app-types
+697 silly ADD node_modules/@firebase/app
+698 silly ADD node_modules/@firebase/app/node_modules/idb
+699 silly ADD node_modules/@firebase/ai
+700 silly ADD node_modules/idb
+701 silly ADD node_modules/firebase
+702 silly ADD node_modules/@react-native-async-storage/async-storage
+703 verbose cwd C:\Users\user\OneDrive\Desktop\Desktop\Trusolutions\trusolution-user
+704 verbose os Windows_NT 10.0.19045
+705 verbose node v22.19.0
+706 verbose npm  v11.6.2
+707 verbose exit 0
+708 info ok

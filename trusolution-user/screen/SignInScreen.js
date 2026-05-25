@@ -6,19 +6,30 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAuth } from "../context/AuthContext";
 
 const SignInScreen = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn, loading } = useAuth();
 
-  const handleSignIn = () => {
-    navigation.navigate("MainTabs");
+  const handleSignIn = async () => {
+    try {
+      await signIn(email, password);
+      navigation.navigate("MainTabs");
+    } catch (err) {
+      Alert.alert(
+        "Sign in failed",
+        err?.message || "Please check your credentials and try again.",
+      );
+    }
   };
 
   return (
@@ -58,8 +69,8 @@ const SignInScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-            <Text style={styles.buttonText}>Sign In</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignIn} disabled={loading}>
+            <Text style={styles.buttonText}>{loading ? "Signing In..." : "Sign In"}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.inlineButton}>

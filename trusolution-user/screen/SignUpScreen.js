@@ -6,10 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAuth } from "../context/AuthContext";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -17,9 +19,23 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { signUp, loading } = useAuth();
 
-  const handleSignUp = () => {
-    navigation.navigate("SelectIssues");
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords do not match", "Please re-enter your password.");
+      return;
+    }
+
+    try {
+      await signUp(email, password);
+      navigation.navigate("SelectIssues");
+    } catch (err) {
+      Alert.alert(
+        "Sign up failed",
+        err?.message || "Please try again.",
+      );
+    }
   };
 
   return (
@@ -71,8 +87,8 @@ const SignUpScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={loading}>
+            <Text style={styles.buttonText}>{loading ? "Creating..." : "Sign Up"}</Text>
           </TouchableOpacity>
         </View>
 
