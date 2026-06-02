@@ -31,9 +31,10 @@ const SelectIssuesScreen = () => {
     async function load() {
       try {
         setLoading(true);
-        const items = await apiRequest("/issues");
+        const result = await apiRequest("/issues");
+        const items = Array.isArray(result) ? result : result?.items || [];
         if (!alive) return;
-        setIssues(items || []);
+        setIssues(items);
       } catch (err) {
         if (!alive) return;
         Alert.alert(

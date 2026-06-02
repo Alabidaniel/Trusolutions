@@ -1,4 +1,6 @@
 const admin = require("firebase-admin");
+const fs = require("fs");
+const path = require("path");
 
 let firebaseInitialized = false;
 
@@ -11,6 +13,29 @@ function getMissingFirebaseEnv() {
   return required.filter((key) => !process.env[key]);
 }
 
+function loadServiceAccountFromPath() {
+  const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+  if (!serviceAccountPath) {
+    return null;
+  }
+
+  const candidates = [
+    path.resolve(process.cwd(), serviceAccountPath),
+    path.resolve(__dirname, "..", "..", serviceAccountPath),
+  ];
+
+  const resolvedPath = candidates.find((candidate) => fs.existsSync(candidate));
+  if (!resolvedPath) {
+    const err = new Error(
+      `Firebase service account file not found: ${serviceAccountPath}`,
+    );
+    err.code = "FIREBASE_ENV_MISSING";
+    throw err;
+  }
+
+  return require(resolvedPath);
+}
+
 function initFirebase() {
   if (firebaseInitialized) {
     return admin;
@@ -21,10 +46,20 @@ function initFirebase() {
     return admin;
   }
 
+  const serviceAccount = loadServiceAccountFromPath();
+  if (serviceAccount) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+
+    firebaseInitialized = true;
+    return admin;
+  }
+
   const missing = getMissingFirebaseEnv();
   if (missing.length > 0) {
     const err = new Error(
-      `Firebase Admin env missing: ${missing.join(", ")}. See .env.example.`,
+      `Firebase Admin env missing: ${missing.join(", ")} or FIREBASE_SERVICE_ACCOUNT_PATH. See .env.example.`,
     );
     err.code = "FIREBASE_ENV_MISSING";
     throw err;
@@ -54,4 +89,3 @@ module.exports = {
   getAuth,
   admin,
 };
-

@@ -29,7 +29,10 @@ const SignUpScreen = () => {
 
     try {
       await signUp(email, password);
-      navigation.navigate("SelectIssues");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "SelectIssues" }],
+      });
     } catch (err) {
       Alert.alert(
         "Sign up failed",

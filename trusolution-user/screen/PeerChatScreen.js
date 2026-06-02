@@ -9,44 +9,91 @@ import {
   KeyboardAvoidingView,
   Platform,
   BackHandler,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-
-const dummyMessages = [
-  {
-    id: "1",
-    text: "Hi! Thanks for sharing your struggle with anxiety. I've been there too.",
-    sender: "peer",
-    time: "10:30 AM",
-  },
-  {
-    id: "2",
-    text: "I'm here to listen without judgement. What's been the hardest part for you?",
-    sender: "peer",
-    time: "10:32 AM",
-  },
-];
+import { apiRequest } from "../api/client";
 
 export default function PeerChatScreen({ route }) {
   const navigation = useNavigation();
   const {
+    chatId,
     conversationStyle = "Both",
-    peerName = "Alex",
+    peerName = "Chat",
     chatType = "peer",
   } = route.params || {};
-  const [messages, setMessages] = useState(dummyMessages);
+  const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(null);
   const flatListRef = useRef();
   const insets = useSafeAreaInsets();
+
+  // Load messages from backend on mount and periodically
+  useEffect(() => {
+    if (!chatId) {
+      setError("Chat ID not provided");
+      setLoading(false);
+      return;
+    }
+
+    let alive = true;
+
+    const loadMessages = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const result = await apiRequest(`/chats/${chatId}/messages`, {
+          query: { limit: 50, order: "asc" },
+        });
+        if (alive) {
+          const formattedMessages = (result.items || []).map((msg) => ({
+            id: msg.id,
+            text: msg.body,
+            sender: msg.senderUserId ? "peer" : "user",
+            time: new Date(msg.createdAt).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            raw: msg,
+          }));
+          setMessages(formattedMessages);
+        }
+      } catch (err) {
+        if (alive) {
+          const errorMsg = err?.message || "Failed to load messages";
+          setError(errorMsg);
+          Alert.alert("Error", errorMsg);
+        }
+      } finally {
+        if (alive) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadMessages();
+
+    // Poll for new messages every 3 seconds
+    const pollInterval = setInterval(loadMessages, 3000);
+
+    return () => {
+      alive = false;
+      clearInterval(pollInterval);
+    };
+  }, [chatId]);
 
   const handleBackPress = React.useCallback(() => {
     if (chatType === "therapist") {
       navigation.goBack();
       return;
     }
-    navigation.navigate("ChatWithPeer");
+    // Navigate back to peer chat list
+    navigation.goBack();
   }, [chatType, navigation]);
 
   useFocusEffect(
@@ -75,42 +122,43 @@ export default function PeerChatScreen({ route }) {
 
   const statusLabel =
     chatType === "therapist"
-      ? "Available now \u2022 Professional support"
-      : `Online \u2022 ${conversationStyle} style`;
+      ? "Available now • Professional support"
+      : `Online • ${conversationStyle} style`;
 
-  const sendMessage = () => {
-    if (!inputText.trim()) {
+  const sendMessage = async () => {
+    if (!inputText.trim() || !chatId) {
       return;
     }
 
-    const newMessage = {
-      id: Date.now().toString(),
-      text: inputText.trim(),
+    const messageText = inputText.trim();
+    setInputText("");
+
+    // Optimistic add to UI
+    const optimisticMessage = {
+      id: `temp-${Date.now()}`,
+      text: messageText,
       sender: "user",
       time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
     };
+    setMessages((prev) => [...prev, optimisticMessage]);
 
-    setMessages((prev) => [...prev, newMessage]);
-    setInputText("");
-
-    setTimeout(() => {
-      const peerResponse = {
-        id: (Date.now() + 1).toString(),
-        text:
-          conversationStyle === "Listener"
-            ? "I'm listening. Please continue..."
-            : "That makes sense. Tell me a little more about what happened.",
-        sender: "peer",
-        time: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      setMessages((prev) => [...prev, peerResponse]);
-    }, 1200);
+    try {
+      setSending(true);
+      await apiRequest(`/chats/${chatId}/messages`, {
+        method: "POST",
+        body: { body: messageText },
+      });
+      // Message sent successfully; will be refreshed in polling
+    } catch (err) {
+      // Rollback optimistic add on failure
+      setMessages((prev) => prev.filter((m) => m.id !== optimisticMessage.id));
+      Alert.alert("Failed to send message", err?.message || "Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const renderMessage = ({ item, index }) => {
@@ -132,7 +180,12 @@ export default function PeerChatScreen({ route }) {
           </View>
         )}
 
-        <View style={[styles.bubble, isUser ? styles.userBubble : styles.peerBubble]}>
+        <View
+          style={[
+            styles.bubble,
+            isUser ? styles.userBubble : styles.peerBubble,
+          ]}
+        >
           <Text style={[styles.messageText, isUser && styles.userMessageText]}>
             {item.text}
           </Text>
@@ -157,10 +210,7 @@ export default function PeerChatScreen({ route }) {
         keyboardVerticalOffset={Platform.OS === "ios" ? 8 : 0}
       >
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={handleBackPress}
-          >
+          <TouchableOpacity style={styles.iconButton} onPress={handleBackPress}>
             <Ionicons name="arrow-back" size={22} color="#2D2418" />
           </TouchableOpacity>
 
@@ -199,18 +249,34 @@ export default function PeerChatScreen({ route }) {
           <Text style={styles.dateDivider}>Today</Text>
         </View>
 
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          renderItem={renderMessage}
-          keyExtractor={(item) => item.id}
-          style={styles.messagesList}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
-            styles.messagesContent,
-            { paddingBottom: 12 + insets.bottom },
-          ]}
-        />
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#7A4B2F" />
+          </View>
+        ) : error ? (
+          <View style={styles.errorContainer}>
+            <Ionicons name="alert-circle-outline" size={40} color="#D97706" />
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        ) : (
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            renderItem={renderMessage}
+            keyExtractor={(item) => item.id}
+            style={styles.messagesList}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[
+              styles.messagesContent,
+              { paddingBottom: 12 + insets.bottom },
+            ]}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>No messages yet. Start the conversation!</Text>
+              </View>
+            }
+          />
+        )}
 
         <View
           style={[
@@ -241,10 +307,10 @@ export default function PeerChatScreen({ route }) {
           <TouchableOpacity
             style={[
               styles.sendButton,
-              !inputText.trim() && styles.sendButtonDisabled,
+              (!inputText.trim() || sending) && styles.sendButtonDisabled,
             ]}
             onPress={sendMessage}
-            disabled={!inputText.trim()}
+            disabled={!inputText.trim() || sending}
           >
             <Ionicons name="send" size={18} color="#fff" />
           </TouchableOpacity>
@@ -334,6 +400,32 @@ const styles = StyleSheet.create({
   messagesContent: {
     paddingHorizontal: 12,
     paddingTop: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  errorText: {
+    color: "#D97706",
+    fontSize: 14,
+    marginTop: 12,
+    textAlign: "center",
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyText: {
+    color: "#6E604D",
+    fontSize: 14,
   },
   messageRow: {
     flexDirection: "row",

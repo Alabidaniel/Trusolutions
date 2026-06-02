@@ -26,7 +26,7 @@ async function listMessages({ userId, chatId, query }) {
     where,
     ...(cursor
       ? {
-          cursor: { id: cursor },
+          cursor: { createdAt: new Date(cursor) },
           skip: 1,
         }
       : {}),
@@ -65,4 +65,3 @@ module.exports = {
   listMessages,
   createMessage,
 };
-

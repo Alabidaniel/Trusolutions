@@ -21,17 +21,14 @@ export default function TherapistBookingScreen() {
   const insets = useSafeAreaInsets();
   const { addAppointment } = useAppointments();
 
-  const therapist = route.params?.therapist || {
-    name: "Dr. Sarah Johnson",
-    specialty: "Anxiety & Stress",
-    rating: 4.9,
-  };
+  const therapist = route.params?.therapist;
 
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [sessionType, setSessionType] = useState("Chat");
   const [slots, setSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(true);
+  const [slotsError, setSlotsError] = useState(null);
   const [booking, setBooking] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
@@ -39,13 +36,18 @@ export default function TherapistBookingScreen() {
     let alive = true;
 
     async function loadSlots() {
-      if (!therapist?.id) {
+      // Validate therapist has required id field
+      if (!therapist?.id || typeof therapist.id !== "string") {
+        setSlotsError(
+          "Invalid therapist selection. Please go back and select again.",
+        );
         setLoadingSlots(false);
         return;
       }
 
       try {
         setLoadingSlots(true);
+        setSlotsError(null);
         const result = await apiRequest(`/therapists/${therapist.id}/slots`, {
           query: { page: 1, limit: 100 },
         });
@@ -53,7 +55,11 @@ export default function TherapistBookingScreen() {
         setSlots(result?.items || []);
       } catch (err) {
         if (!alive) return;
-        Alert.alert("Failed to load slots", err?.message || "Please try again.");
+        setSlotsError(err?.message || "Failed to load available slots");
+        Alert.alert(
+          "Failed to load slots",
+          err?.message || "Please try again.",
+        );
       } finally {
         if (alive) setLoadingSlots(false);
       }
@@ -75,7 +81,10 @@ export default function TherapistBookingScreen() {
           id: s.id,
           startAt: s.startAt,
           endAt: s.endAt,
-          label: d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          label: d.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
         };
       });
   }, [selectedDate, slots]);
@@ -97,7 +106,9 @@ export default function TherapistBookingScreen() {
     [selectedDate],
   );
 
-  const canConfirm = Boolean(selectedDate && selectedTime && sessionType && selectedSlot);
+  const canConfirm = Boolean(
+    selectedDate && selectedTime && sessionType && selectedSlot,
+  );
 
   const handleConfirmBooking = async () => {
     if (!canConfirm) {
@@ -163,7 +174,7 @@ export default function TherapistBookingScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Choose a date</Text>
           <View style={styles.calendarCard}>
-              <Calendar
+            <Calendar
               onDayPress={(day) => {
                 setSelectedDate(day.dateString);
                 setSelectedTime("");
@@ -204,7 +215,10 @@ export default function TherapistBookingScreen() {
                 return (
                   <TouchableOpacity
                     key={slot.id}
-                    style={[styles.optionChip, selected && styles.optionChipActive]}
+                    style={[
+                      styles.optionChip,
+                      selected && styles.optionChipActive,
+                    ]}
                     onPress={() => {
                       setSelectedTime(slot.label);
                       setSelectedSlot(slot);
@@ -238,7 +252,10 @@ export default function TherapistBookingScreen() {
               return (
                 <TouchableOpacity
                   key={type}
-                  style={[styles.optionChip, selected && styles.optionChipActive]}
+                  style={[
+                    styles.optionChip,
+                    selected && styles.optionChipActive,
+                  ]}
                   onPress={() => setSessionType(type)}
                 >
                   <Text
@@ -271,7 +288,9 @@ export default function TherapistBookingScreen() {
           disabled={!canConfirm || booking}
           onPress={handleConfirmBooking}
         >
-          <Text style={styles.buttonText}>{booking ? "Booking..." : "Confirm Booking"}</Text>
+          <Text style={styles.buttonText}>
+            {booking ? "Booking..." : "Confirm Booking"}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

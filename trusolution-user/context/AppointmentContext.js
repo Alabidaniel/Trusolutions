@@ -1,11 +1,20 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { apiRequest } from "../api/client";
+import { useAuth } from "./AuthContext";
 
 const AppointmentContext = createContext(null);
 
 export function AppointmentProvider({ children }) {
+  const { firebaseUser, initializing } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const firebaseUid = firebaseUser?.uid || null;
 
   const formatAppointment = (appointment) => {
     if (!appointment) return null;
@@ -13,15 +22,23 @@ export function AppointmentProvider({ children }) {
     const startAt = appointment.scheduledStartAt
       ? new Date(appointment.scheduledStartAt)
       : null;
-    const date = startAt && !Number.isNaN(startAt.getTime())
-      ? startAt.toISOString().slice(0, 10)
-      : "";
-    const time = startAt && !Number.isNaN(startAt.getTime())
-      ? startAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-      : "";
+    const date =
+      startAt && !Number.isNaN(startAt.getTime())
+        ? startAt.toISOString().slice(0, 10)
+        : "";
+    const time =
+      startAt && !Number.isNaN(startAt.getTime())
+        ? startAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        : "";
 
-    const status =
-      appointment.status === "CANCELED" ? "Canceled" : "Confirmed";
+    // Properly map backend status to frontend status
+    const statusMap = {
+      SCHEDULED: "Scheduled",
+      CONFIRMED: "Confirmed",
+      CANCELED: "Canceled",
+      COMPLETED: "Completed",
+    };
+    const status = statusMap[appointment.status] || "Unknown";
 
     const sessionTypeMap = {
       CHAT: "Chat",
@@ -43,6 +60,7 @@ export function AppointmentProvider({ children }) {
       time,
       sessionType: sessionTypeMap[appointment.appointmentType] || "Chat",
       status,
+      rawStatus: appointment.status,
       chatId: appointment.chat?.id || appointment.chatId || null,
       raw: appointment,
     };
@@ -61,8 +79,18 @@ export function AppointmentProvider({ children }) {
   };
 
   useEffect(() => {
+    if (initializing) {
+      return;
+    }
+
+    if (!firebaseUid) {
+      setAppointments([]);
+      setLoading(false);
+      return;
+    }
+
     refreshUpcoming().catch(() => setLoading(false));
-  }, []);
+  }, [firebaseUid, initializing]);
 
   const toAppointmentType = (sessionType) => {
     if (sessionType === "Call") return "CALL";
@@ -71,22 +99,52 @@ export function AppointmentProvider({ children }) {
   };
 
   const buildIsoDateTime = (dateStr, timeStr) => {
-    // timeStr: "9:00 AM"
-    const match = String(timeStr || "").trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
-    if (!match) return null;
-    let hour = Number(match[1]);
-    const minute = Number(match[2]);
-    const ampm = match[3].toUpperCase();
-    if (ampm === "PM" && hour < 12) hour += 12;
-    if (ampm === "AM" && hour === 12) hour = 0;
+    if (!dateStr) return null;
+    
+    // Try multiple time formats for robustness
+    const trimmedTime = String(timeStr || "").trim();
+    let hour = null;
+    let minute = null;
+
+    // Format 1: "9:00 AM"
+    const ampmMatch = trimmedTime.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (ampmMatch) {
+      hour = Number(ampmMatch[1]);
+      minute = Number(ampmMatch[2]);
+      const ampm = ampmMatch[3].toUpperCase();
+      if (ampm === "PM" && hour < 12) hour += 12;
+      if (ampm === "AM" && hour === 12) hour = 0;
+    } else {
+      // Format 2: "09:00" (24-hour)
+      const iso24Match = trimmedTime.match(/^(\d{1,2}):(\d{2})$/);
+      if (iso24Match) {
+        hour = Number(iso24Match[1]);
+        minute = Number(iso24Match[2]);
+      }
+    }
+
+    if (hour === null || minute === null) {
+      return null;
+    }
+
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      return null;
+    }
 
     const local = new Date(`${dateStr}T00:00:00`);
     if (Number.isNaN(local.getTime())) return null;
+    
     local.setHours(hour, minute, 0, 0);
     return local.toISOString();
   };
 
-  const addAppointment = async ({ therapist, date, time, sessionType, slot }) => {
+  const addAppointment = async ({
+    therapist,
+    date,
+    time,
+    sessionType,
+    slot,
+  }) => {
     let startIso = slot?.startAt || buildIsoDateTime(date, time);
     let endIso = slot?.endAt || null;
 
@@ -99,7 +157,9 @@ export function AppointmentProvider({ children }) {
       throw new Error("Invalid appointment start time");
     }
 
-    const end = endIso ? new Date(endIso) : new Date(start.getTime() + 45 * 60 * 1000);
+    const end = endIso
+      ? new Date(endIso)
+      : new Date(start.getTime() + 45 * 60 * 1000);
 
     const created = await apiRequest("/appointments", {
       method: "POST",
@@ -129,15 +189,21 @@ export function AppointmentProvider({ children }) {
       raw: created,
     };
 
-    setAppointments((prev) => [formatted, ...prev.filter((x) => x.id !== formatted.id)]);
+    setAppointments((prev) => [
+      formatted,
+      ...prev.filter((x) => x.id !== formatted.id),
+    ]);
     refreshUpcoming().catch(() => {});
     return formatted;
   };
 
   const cancelAppointment = async (appointmentId) => {
-    const appointment = await apiRequest(`/appointments/${appointmentId}/cancel`, {
-      method: "PATCH",
-    });
+    const appointment = await apiRequest(
+      `/appointments/${appointmentId}/cancel`,
+      {
+        method: "PATCH",
+      },
+    );
     await refreshUpcoming();
     return formatAppointment(appointment);
   };
@@ -162,24 +228,33 @@ export function AppointmentProvider({ children }) {
     const start = new Date(scheduledStartAt);
     const end = new Date(start.getTime() + 45 * 60 * 1000);
 
-    const appointment = await apiRequest(`/appointments/${appointmentId}/reschedule`, {
-      method: "PATCH",
-      body: { scheduledStartAt: start.toISOString(), scheduledEndAt: end.toISOString() },
-    });
+    const appointment = await apiRequest(
+      `/appointments/${appointmentId}/reschedule`,
+      {
+        method: "PATCH",
+        body: {
+          scheduledStartAt: start.toISOString(),
+          scheduledEndAt: end.toISOString(),
+        },
+      },
+    );
 
     await refreshUpcoming();
     return formatAppointment(appointment);
   };
 
   const getAppointmentById = async (appointmentId) => {
-    const existing = appointments.find((item) => item.id === appointmentId) || null;
+    const existing =
+      appointments.find((item) => item.id === appointmentId) || null;
     if (existing) return existing;
     const fetched = await apiRequest(`/appointments/${appointmentId}`);
     return formatAppointment(fetched);
   };
 
   const upcomingAppointment =
-    appointments.find((item) => ["SCHEDULED", "CONFIRMED", "Confirmed"].includes(item.status)) || null;
+    appointments.find((item) =>
+      ["Scheduled", "Confirmed"].includes(item.status),
+    ) || null;
 
   const value = useMemo(
     () => ({

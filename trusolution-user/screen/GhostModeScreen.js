@@ -50,7 +50,7 @@ const GhostModeScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.continueButton}
-            onPress={() => navigation.navigate("WelcomeAboard")}
+            onPress={() => navigation.navigate("SharingMode")}
           >
             <Text style={styles.continueText}>Continue</Text>
           </TouchableOpacity>

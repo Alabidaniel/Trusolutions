@@ -97,7 +97,7 @@ const FocusModeScreen = () => {
 
         <TouchableOpacity
           style={[styles.button, !selectedMode && styles.disabledButton]}
-          onPress={() => selectedMode && navigation.navigate("MainTabs")}
+          onPress={() => selectedMode && navigation.navigate("WelcomeAboard")}
           disabled={!selectedMode}
         >
           <Text style={styles.buttonText}>Finish Setup</Text>

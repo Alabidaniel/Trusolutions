@@ -14,8 +14,9 @@ async function createMatchRequest({ userId, data }) {
       },
     });
 
-    // Enterprise note: real matching should be async (queue/worker). For now we create
-    // a self-contained session+chat immediately so the existing frontend flow works.
+    // Create an immediate session for the requester. In production, matching would be async (queue/worker).
+    // Frontend expects a session+chat to exist immediately so user can start typing.
+    // peerUserId remains null until a peer joins via a separate match acceptance flow.
     const session = await tx.session.create({
       data: {
         requesterUserId: userId,
@@ -26,6 +27,7 @@ async function createMatchRequest({ userId, data }) {
       },
     });
 
+    // Create PEER chat with only the requester as participant initially
     const chat = await tx.chat.create({
       data: {
         type: "PEER",
@@ -115,21 +117,36 @@ async function rateSession({ userId, sessionId, data }) {
     throw err;
   }
 
-  const rating = await prisma.peerRating.upsert({
+  // Business rule: only allow rating completed sessions
+  if (session.status !== "COMPLETED") {
+    const err = new Error("Cannot rate an incomplete session");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  // Business rule: validate rating value
+  const rating = Number(data.rating);
+  if (Number.isNaN(rating) || rating < 1 || rating > 5) {
+    const err = new Error("Rating must be between 1 and 5");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const peerRating = await prisma.peerRating.upsert({
     where: { sessionId },
     create: {
       sessionId,
       raterUserId: userId,
-      rating: data.rating,
-      feedback: data.feedback,
+      rating,
+      feedback: data.feedback || null,
     },
     update: {
-      rating: data.rating,
-      feedback: data.feedback,
+      rating,
+      feedback: data.feedback || null,
     },
   });
 
-  return rating;
+  return peerRating;
 }
 
 module.exports = {
@@ -138,4 +155,3 @@ module.exports = {
   cancelMatchRequest,
   rateSession,
 };
-

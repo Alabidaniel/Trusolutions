@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   FlatList,
   Pressable,
@@ -11,66 +11,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { apiRequest } from "../api/client";
 
 const filters = ["All", "Anxiety", "Trauma", "Relationships", "Focus"];
-
-const therapists = [
-  {
-    id: "1",
-    name: "Dr. Sarah Johnson",
-    specialty: "Anxiety & Stress",
-    rating: 4.9,
-    sessions: 150,
-    nextSlot: "Today, 4:30 PM",
-    price: "$45/session",
-    availability: "Available now",
-    tone: "Calm, practical support",
-  },
-  {
-    id: "2",
-    name: "Dr. Michael Chen",
-    specialty: "Depression & Mood",
-    rating: 4.8,
-    sessions: 200,
-    nextSlot: "Tomorrow, 10:00 AM",
-    price: "$50/session",
-    availability: "Next opening soon",
-    tone: "Warm, structured sessions",
-  },
-  {
-    id: "3",
-    name: "Dr. Emily Rodriguez",
-    specialty: "Relationship Issues",
-    rating: 5.0,
-    sessions: 120,
-    nextSlot: "Today, 6:00 PM",
-    price: "$55/session",
-    availability: "Available today",
-    tone: "Empathetic communication coach",
-  },
-  {
-    id: "4",
-    name: "Dr. David Kim",
-    specialty: "Trauma & PTSD",
-    rating: 4.7,
-    sessions: 180,
-    nextSlot: "Tomorrow, 2:15 PM",
-    price: "$60/session",
-    availability: "Limited slots",
-    tone: "Grounding, trauma-informed care",
-  },
-  {
-    id: "5",
-    name: "Dr. Lisa Patel",
-    specialty: "ADHD & Focus",
-    rating: 4.9,
-    sessions: 95,
-    nextSlot: "Today, 5:15 PM",
-    price: "$48/session",
-    availability: "Available today",
-    tone: "Action-oriented and supportive",
-  },
-];
 
 const getInitials = (name) =>
   name
@@ -84,6 +27,39 @@ const TherapistScreen = () => {
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [therapists, setTherapists] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let alive = true;
+
+    async function loadTherapists() {
+      try {
+        setLoading(true);
+        setError(null);
+        const result = await apiRequest("/therapists", {
+          query: { page: 1, limit: 50 },
+        });
+        if (alive) {
+          setTherapists(result?.items || []);
+        }
+      } catch (err) {
+        if (alive) {
+          setError(err?.message || "Failed to load therapists");
+        }
+      } finally {
+        if (alive) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadTherapists();
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const filteredTherapists = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -97,7 +73,9 @@ const TherapistScreen = () => {
 
       const matchesFilter =
         selectedFilter === "All" ||
-        therapist.specialty.toLowerCase().includes(selectedFilter.toLowerCase());
+        therapist.specialty
+          .toLowerCase()
+          .includes(selectedFilter.toLowerCase());
 
       return matchesSearch && matchesFilter;
     });
@@ -209,7 +187,9 @@ const TherapistScreen = () => {
     <TouchableOpacity
       activeOpacity={0.92}
       style={[styles.therapistCard, index === 0 && styles.featuredCard]}
-      onPress={() => navigation.navigate("TherapistProfile", { therapist: item })}
+      onPress={() =>
+        navigation.navigate("TherapistProfile", { therapist: item })
+      }
     >
       <View style={styles.cardTopRow}>
         <View style={styles.avatarWrap}>

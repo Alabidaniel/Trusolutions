@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { apiRequest } from "../api/client";
+import { useAuth } from "./AuthContext";
 
 const CommunityContext = createContext(null);
 
@@ -28,8 +35,10 @@ function normalizePost(p) {
 }
 
 export function CommunityProvider({ children }) {
+  const { firebaseUser, initializing } = useAuth();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const firebaseUid = firebaseUser?.uid || null;
 
   const refresh = async () => {
     setLoading(true);
@@ -45,10 +54,20 @@ export function CommunityProvider({ children }) {
   };
 
   useEffect(() => {
+    if (initializing) {
+      return;
+    }
+
+    if (!firebaseUid) {
+      setPosts([]);
+      setLoading(false);
+      return;
+    }
+
     refresh().catch(() => {
       setLoading(false);
     });
-  }, []);
+  }, [firebaseUid, initializing]);
 
   const addPost = async ({ title, experience, topics, isAnonymous }) => {
     const post = await apiRequest("/community/posts", {
@@ -61,11 +80,11 @@ export function CommunityProvider({ children }) {
       },
     });
 
-    // Optimistic insert; then refresh to pull correct counts + author display.
+    // Optimistic insert using backend field names; then refresh to pull correct counts + author display.
     setPosts((prev) => [
       {
         id: post.id,
-        author: isAnonymous ? "Anonymous" : "You",
+        author: post.authorDisplayName || (isAnonymous ? "Anonymous" : "You"),
         isAnonymous: Boolean(isAnonymous),
         title: post.title,
         experience: post.body,
@@ -144,7 +163,12 @@ export function CommunityProvider({ children }) {
       setPosts((prev) =>
         prev.map((p) =>
           p.id === postId
-            ? { ...p, reaction: result.reaction ? result.reaction.toLowerCase() : null }
+            ? {
+                ...p,
+                reaction: result.reaction
+                  ? result.reaction.toLowerCase()
+                  : null,
+              }
             : p,
         ),
       );

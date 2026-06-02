@@ -73,7 +73,7 @@ export default function MaskedModeScreen() {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("WelcomeAboard")}
+          onPress={() => navigation.navigate("SharingMode")}
         >
           <Text style={styles.buttonText}>Continue as Masked</Text>
         </TouchableOpacity>

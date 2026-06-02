@@ -49,7 +49,7 @@ export default function OnboardingScreen1() {
         </View>
 
         <View style={styles.buttonsRow}>
-          <TouchableOpacity onPress={() => navigation.navigate("MainTabs")}>
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text style={styles.skipText}>Skip</Text>
           </TouchableOpacity>
 

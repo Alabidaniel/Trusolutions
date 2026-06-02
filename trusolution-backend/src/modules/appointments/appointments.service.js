@@ -1,7 +1,21 @@
 const prisma = require("../../config/prisma");
 
-function buildBookingCode() {
-  return `BK-${Math.floor(100000 + Math.random() * 900000).toString()}`;
+async function buildBookingCode(tx) {
+  // Generate unique booking code with retry logic
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const code = `BK-${Math.floor(100000 + Math.random() * 900000).toString()}`;
+    const exists = await tx.appointment.findFirst({
+      where: { bookingCode: code },
+      select: { id: true },
+    });
+    if (!exists) {
+      return code;
+    }
+  }
+  // If we've tried 5 times and still hit collisions, throw error
+  const err = new Error("Failed to generate unique booking code");
+  err.statusCode = 500;
+  throw err;
 }
 
 async function create({ userId, data }) {
@@ -41,16 +55,7 @@ async function create({ userId, data }) {
       scheduledEndAt = slot.endAt;
     }
 
-    let bookingCode = buildBookingCode();
-    // Best-effort collision avoidance
-    for (let i = 0; i < 3; i += 1) {
-      const exists = await tx.appointment.findFirst({
-        where: { bookingCode },
-        select: { id: true },
-      });
-      if (!exists) break;
-      bookingCode = buildBookingCode();
-    }
+    let bookingCode = await buildBookingCode(tx);
 
     const appointment = await tx.appointment.create({
       data: {
@@ -139,11 +144,58 @@ async function reschedule({ userId, id, data }) {
     throw err;
   }
 
+  const { scheduledStartAt, scheduledEndAt } = data;
+
+  // Validate times
+  if (!scheduledStartAt || !scheduledEndAt) {
+    const err = new Error("Start and end times are required");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const startDate = new Date(scheduledStartAt);
+  const endDate = new Date(scheduledEndAt);
+
+  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    const err = new Error("Invalid date/time format");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  if (endDate <= startDate) {
+    const err = new Error("End time must be after start time");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  // Check for overlaps with other appointments for the same therapist
+  const overlappingAppointment = await prisma.appointment.findFirst({
+    where: {
+      therapistId: appointment.therapistId,
+      id: { not: id },
+      deletedAt: null,
+      status: { in: ["SCHEDULED", "CONFIRMED"] },
+      OR: [
+        {
+          // New appointment starts within existing appointment
+          scheduledStartAt: { lt: endDate },
+          scheduledEndAt: { gt: startDate },
+        },
+      ],
+    },
+  });
+
+  if (overlappingAppointment) {
+    const err = new Error("Therapist has conflicting appointment at this time");
+    err.statusCode = 409;
+    throw err;
+  }
+
   return prisma.appointment.update({
     where: { id },
     data: {
-      scheduledStartAt: data.scheduledStartAt,
-      scheduledEndAt: data.scheduledEndAt,
+      scheduledStartAt,
+      scheduledEndAt,
       rescheduledAt: new Date(),
       status: "SCHEDULED",
     },
@@ -166,13 +218,26 @@ async function cancel({ userId, id }) {
     return appointment;
   }
 
-  return prisma.appointment.update({
-    where: { id },
-    data: {
-      status: "CANCELED",
-      canceledAt: new Date(),
-    },
-    include: { therapist: true, slot: true, chat: true },
+  return prisma.$transaction(async (tx) => {
+    // Update appointment status
+    const updated = await tx.appointment.update({
+      where: { id },
+      data: {
+        status: "CANCELED",
+        canceledAt: new Date(),
+      },
+      include: { therapist: true, slot: true, chat: true },
+    });
+
+    // Free up the therapist slot if one was allocated
+    if (appointment.slotId) {
+      await tx.therapistSlot.update({
+        where: { id: appointment.slotId },
+        data: { status: "AVAILABLE" },
+      });
+    }
+
+    return updated;
   });
 }
 
@@ -183,4 +248,3 @@ module.exports = {
   reschedule,
   cancel,
 };
-
