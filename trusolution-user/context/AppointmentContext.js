@@ -100,7 +100,7 @@ export function AppointmentProvider({ children }) {
 
   const buildIsoDateTime = (dateStr, timeStr) => {
     if (!dateStr) return null;
-    
+
     // Try multiple time formats for robustness
     const trimmedTime = String(timeStr || "").trim();
     let hour = null;
@@ -133,7 +133,7 @@ export function AppointmentProvider({ children }) {
 
     const local = new Date(`${dateStr}T00:00:00`);
     if (Number.isNaN(local.getTime())) return null;
-    
+
     local.setHours(hour, minute, 0, 0);
     return local.toISOString();
   };

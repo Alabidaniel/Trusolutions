@@ -155,7 +155,10 @@ export default function PeerChatScreen({ route }) {
     } catch (err) {
       // Rollback optimistic add on failure
       setMessages((prev) => prev.filter((m) => m.id !== optimisticMessage.id));
-      Alert.alert("Failed to send message", err?.message || "Please try again.");
+      Alert.alert(
+        "Failed to send message",
+        err?.message || "Please try again.",
+      );
     } finally {
       setSending(false);
     }
@@ -272,7 +275,9 @@ export default function PeerChatScreen({ route }) {
             ]}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>No messages yet. Start the conversation!</Text>
+                <Text style={styles.emptyText}>
+                  No messages yet. Start the conversation!
+                </Text>
               </View>
             }
           />
